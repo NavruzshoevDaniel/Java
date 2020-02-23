@@ -5,6 +5,7 @@ import stackcalculator.exceptions.StackCalculatorExceptions;
 
 
 public interface ICommand {
+
     static boolean isNumeric(String str) {
         try {
             Double.parseDouble(str);

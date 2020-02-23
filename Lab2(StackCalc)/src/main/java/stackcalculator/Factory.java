@@ -5,11 +5,14 @@ import stackcalculator.commands.ICommand;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Factory {
 
     private Factory() { };
     private static Factory instance = null;
+    private static Logger logger = Logger.getLogger(Factory.class.getName());
 
     public static Factory getInstance() {
         if (instance == null) {
@@ -25,26 +28,32 @@ public class Factory {
 
         try {
             fis = new FileInputStream("src/main/resources/config.properties");
+            logger.log(Level.FINE, "FileInputStream was created");
             Properties property = new Properties();
             property.load(fis);
             String clazzCommandName = property.getProperty(commandName);
             Class command = Class.forName(clazzCommandName);
             iCommand= (ICommand) command.newInstance();
+            logger.log(Level.FINE, "New Command({0}) was created",iCommand.getClass().getName());
 
-        } catch (Exception e) {
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Config file wasn't opened");
             e.printStackTrace();
-        } finally {
+
+        } catch (Exception e){
+            logger.log(Level.WARNING, "New Command wasn't created:",e);
+        }  finally {
             try {
-                if (fis != null)
+                if (fis != null){
                     fis.close();
+                    logger.log(Level.FINE, "FileInputStream was closed successfully ");
+                }
+
             } catch (IOException ex) {
-                System.err.format("IOException: %s%n", ex);
+                logger.log(Level.WARNING, "The program couldn't close FileInputStream");
             }
         }
 
-        if (iCommand!=null){
-
-        }
 
         return iCommand;
     }

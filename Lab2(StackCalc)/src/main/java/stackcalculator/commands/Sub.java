@@ -6,9 +6,11 @@ import stackcalculator.exceptions.StackCalculatorExceptions;
 import stackcalculator.exceptions.WrongNumberOfArguments;
 
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Sub implements ICommand {
-
+    private final static Logger logger = Logger.getLogger(Sub.class.getName());
     @Override
     public void execute(Context context, String[] args) throws StackCalculatorExceptions {
         if (args == null || args.length != 0)
@@ -18,5 +20,6 @@ public class Sub implements ICommand {
         double number1 = stack.pop();
         double number2 = stack.pop();
         stack.push(number1 - number2);
+        logger.log(Level.FINE,"Successfully did operation {0}", this.getClass().getName());
     }
 }

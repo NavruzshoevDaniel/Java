@@ -4,8 +4,12 @@ import stackcalculator.commands.context.Context;
 import stackcalculator.exceptions.StackCalculatorExceptions;
 import stackcalculator.exceptions.WrongNumberOfArguments;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class Define implements ICommand {
+    private final static Logger logger = Logger.getLogger(Define.class.getName());
     private boolean checkArgs(String[] args) {
         if (args == null || args.length != 2)
             return false;
@@ -17,9 +21,10 @@ public class Define implements ICommand {
 
     @Override
     public void execute(Context context, String[] args) throws StackCalculatorExceptions {
-        if (checkArgs(args))
+        if (!checkArgs(args))
             throw new WrongNumberOfArguments("WrongArguments exceptions for Define");
         context.getDefineTable().put(args[0], Double.valueOf(args[1]));
+        logger.log(Level.FINE,"Successfully did operation {0}", this.getClass().getName());
     }
 
 }

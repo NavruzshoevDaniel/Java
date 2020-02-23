@@ -6,8 +6,11 @@ import stackcalculator.exceptions.StackCalculatorExceptions;
 import stackcalculator.exceptions.WrongNumberOfArguments;
 
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Division implements ICommand{
+    private final static Logger logger = Logger.getLogger(Division.class.getName());
 
     @Override
     public void execute(Context context, String[] args) throws StackCalculatorExceptions {
@@ -20,5 +23,6 @@ public class Division implements ICommand{
         double number2=stack.pop();
         stack.push(number1/number2);
         stack.push(Math.sqrt(stack.pop()));
+        logger.log(Level.FINE,"Successfully did operation {0}", this.getClass().getName());
     }
 }

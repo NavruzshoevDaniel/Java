@@ -5,9 +5,11 @@ import stackcalculator.exceptions.StackCalculatorExceptions;
 import stackcalculator.exceptions.WrongNumberOfArguments;
 
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Push implements ICommand {
-
+    private final static Logger logger = Logger.getLogger(Push.class.getName());
 
     @Override
     public void execute(Context context, String[] args) throws StackCalculatorExceptions {
@@ -27,5 +29,6 @@ public class Push implements ICommand {
             }
 
         }
+        logger.log(Level.FINE,"Successfully did operation {0}", this.getClass().getName());
     }
 }
