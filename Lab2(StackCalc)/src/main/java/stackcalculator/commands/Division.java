@@ -22,7 +22,6 @@ public class Division implements ICommand{
         double number1=stack.pop();
         double number2=stack.pop();
         stack.push(number1/number2);
-        stack.push(Math.sqrt(stack.pop()));
         logger.log(Level.FINE,"Successfully did operation {0}", this.getClass().getName());
     }
 }
