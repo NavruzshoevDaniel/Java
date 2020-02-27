@@ -12,11 +12,11 @@ class SqrtTest {
     void execute() throws StackCalculatorExceptions {
         Context context= new Context();
         Sqrt sqrt=new Sqrt();
-        context.getStack().push(16.0d);
+        context.push(16.0d);
         sqrt.execute(context,new String[0]);
-        assertEquals(context.getStack().peek(),4.0,0.00000001);
+        assertEquals(context.peek(),4.0,0.00000001);
         sqrt.execute(context,new String[0]);
-        assertEquals(context.getStack().peek(),2.0,0.00000001);
+        assertEquals(context.peek(),2.0,0.00000001);
 
     }
 }

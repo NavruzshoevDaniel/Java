@@ -7,12 +7,28 @@ public class Context {
     private Stack<Double> stack=new Stack<>();
     private HashMap<String,Double> defineTable=new HashMap<>();
 
-    public Stack<Double> getStack() {
-        return stack;
+
+    public void putInDefineTable(String key,Double value){
+        defineTable.put(key,value);
     }
 
-    public HashMap<String, Double> getDefineTable() {
-        return defineTable;
+    public Double getFromDefineTable(String key){
+       return defineTable.get(key);
     }
 
+    public void push(Double value){
+        stack.push(value);
+    }
+
+    public Double pop(){
+        return stack.pop();
+    }
+
+    public Double peek(){
+        return stack.peek();
+    }
+
+    public int getStackSize(){
+        return stack.size();
+    }
 }

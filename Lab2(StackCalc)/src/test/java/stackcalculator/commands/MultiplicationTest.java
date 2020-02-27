@@ -12,13 +12,13 @@ class MultiplicationTest {
     void execute() throws StackCalculatorExceptions {
         Context context= new Context();
         Multiplication sub=new Multiplication();
-        context.getStack().push(5.0d);
-        context.getStack().push(4.0d);
-        context.getStack().push(1.0d);
+        context.push(5.0d);
+        context.push(4.0d);
+        context.push(1.0d);
         sub.execute(context,new String[0]);
-        assertEquals(context.getStack().peek(),4.0,0.00000001);
+        assertEquals(context.peek(),4.0,0.00000001);
         sub.execute(context,new String[0]);
-        assertEquals(context.getStack().peek(),20.0,0.00000001);
+        assertEquals(context.peek(),20.0,0.00000001);
 
     }
 }

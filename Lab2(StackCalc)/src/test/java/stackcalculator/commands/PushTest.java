@@ -16,12 +16,12 @@ class PushTest {
         args[0]="5";
 
         push.execute(context,args);
-        assertEquals(context.getStack().peek(),5.0,0.00000001);
+        assertEquals(context.peek(),5.0,0.00000001);
 
-        context.getDefineTable().put("a",4.0);
+        context.putInDefineTable("a",4.0);
         args[0]="a";
         push.execute(context,args);
-        assertEquals(context.getStack().peek(),4.0,0.00000001);
+        assertEquals(context.peek(),4.0,0.00000001);
 
     }
 }

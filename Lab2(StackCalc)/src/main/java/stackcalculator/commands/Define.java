@@ -23,7 +23,7 @@ public class Define implements ICommand {
     public void execute(Context context, String[] args) throws StackCalculatorExceptions {
         if (!checkArgs(args))
             throw new WrongNumberOfArguments("WrongArguments exceptions for Define");
-        context.getDefineTable().put(args[0], Double.valueOf(args[1]));
+        context.putInDefineTable(args[0], Double.valueOf(args[1]));
         logger.log(Level.FINE,"Successfully did operation {0}", this.getClass().getName());
     }
 

@@ -12,7 +12,7 @@ public class Pop implements ICommand {
     @Override
     public void execute(Context context, String[] args) throws StackCalculatorExceptions {
         if (args == null || args.length != 0) throw new WrongNumberOfArguments("WrongArguments exceptions for Pop");
-        context.getStack().pop();
+        context.pop();
         logger.log(Level.FINE,"Successfully did operation {0}", this.getClass().getName());
     }
 }

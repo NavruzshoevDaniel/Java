@@ -12,12 +12,12 @@ class SumTest {
     void execute() throws StackCalculatorExceptions {
         Context context= new Context();
         Sum sum=new Sum();
-        context.getStack().push(5.0d);
-        context.getStack().push(4.0d);
-        context.getStack().push(1.0d);
+        context.push(5.0d);
+        context.push(4.0d);
+        context.push(1.0d);
         sum.execute(context,new String[0]);
-        assertEquals(context.getStack().peek(),5.0,0.00000001);
+        assertEquals(context.peek(),5.0,0.00000001);
         sum.execute(context,new String[0]);
-        assertEquals(context.getStack().peek(),10.0,0.00000001);
+        assertEquals(context.peek(),10.0,0.00000001);
     }
 }

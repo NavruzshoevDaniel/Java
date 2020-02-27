@@ -14,7 +14,7 @@ public class Print implements ICommand {
         if (args == null || args.length != 0)
             throw new WrongNumberOfArguments("WrongArguments exceptions for Print");
 
-        System.out.println(context.getStack().peek());
+        System.out.println(context.peek());
         logger.log(Level.FINE,"Successfully did operation {0}", this.getClass().getName());
     }
 }

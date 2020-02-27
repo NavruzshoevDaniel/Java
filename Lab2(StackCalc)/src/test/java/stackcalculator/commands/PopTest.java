@@ -12,12 +12,12 @@ class PopTest {
     void execute() throws StackCalculatorExceptions {
         Context context= new Context();
         Pop pop=new Pop();
-        context.getStack().push(5.0d);
-        context.getStack().push(4.0d);
-        context.getStack().push(1.0d);
+        context.push(5.0d);
+        context.push(4.0d);
+        context.push(1.0d);
         pop.execute(context,new String[0]);
-        assertEquals(context.getStack().peek(),4,0.00000001);
+        assertEquals(context.peek(),4,0.00000001);
         pop.execute(context,new String[0]);
-        assertEquals(context.getStack().peek(),5,0.00000001);
+        assertEquals(context.peek(),5,0.00000001);
     }
 }

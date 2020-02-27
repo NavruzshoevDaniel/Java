@@ -4,7 +4,6 @@ import stackcalculator.commands.context.Context;
 import stackcalculator.exceptions.StackCalculatorExceptions;
 import stackcalculator.exceptions.WrongNumberOfArguments;
 
-import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,16 +15,15 @@ public class Push implements ICommand {
         if (args == null || args.length != 1)
             throw new WrongNumberOfArguments("WrongArguments exceptions for PUSH");
 
-        Stack<Double> stack = context.getStack();
 
         if(ICommand.isNumeric(args[0])){
-            stack.push(Double.valueOf(args[0]));
+            context.push(Double.valueOf(args[0]));
         } else {
-            Double defineValue=context.getDefineTable().get(args[0]);
+            Double defineValue=context.getFromDefineTable(args[0]);
             if(defineValue==null)
                 throw new WrongNumberOfArguments("WrongArguments exceptions for PUSH");
             else {
-                stack.push(defineValue);
+                context.push(defineValue);
             }
 
         }

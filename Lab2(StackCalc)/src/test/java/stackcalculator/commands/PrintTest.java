@@ -14,10 +14,10 @@ class PrintTest {
         Print print=new Print();
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
         System.setOut(new java.io.PrintStream(out));
-        context.getStack().push(5.0d);
+        context.push(5.0d);
         print.execute(context,new String[0]);
         Double actual=Double.valueOf(out.toString());
-        assertEquals(context.getStack().peek(),actual,0.00000001);
+        assertEquals(context.peek(),actual,0.00000001);
 
 
     }

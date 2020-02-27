@@ -12,13 +12,13 @@ class DivisionTest {
     void execute() throws StackCalculatorExceptions {
         Context context= new Context();
         Division div=new Division();
-        context.getStack().push(2.0d);
-        context.getStack().push(4.0d);
-        context.getStack().push(20.0d);
+        context.push(2.0d);
+        context.push(4.0d);
+        context.push(20.0d);
         div.execute(context,new String[0]);
-        assertEquals(context.getStack().peek(),5.0,0.00000001);
+        assertEquals(context.peek(),5.0,0.00000001);
         div.execute(context,new String[0]);
-        assertEquals(context.getStack().peek(),2.5,0.00000001);
+        assertEquals(context.peek(),2.5,0.00000001);
 
     }
 }
