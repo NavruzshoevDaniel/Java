@@ -10,11 +10,6 @@ import java.util.logging.Logger;
 
 public class StackCalculator {
     private static Logger logger = Logger.getLogger(StackCalculator.class.getName());
-    private InputStream input;
-
-    public StackCalculator(InputStream input) {
-        this.input = input;
-    }
 
     private void commandExecuting(ICommand command, Context context, String[] args, String commandName) {
         if (command != null) {
@@ -31,7 +26,7 @@ public class StackCalculator {
         }
     }
 
-    public void calculate() {
+    public void calculate(InputStream input) {
         BufferedReader bufferedReader = null;
         ICommand command = null;
         Context context = new Context();
