@@ -1,41 +1,18 @@
-мар 02, 2020 5:41:04 PM Main main
+мар 04, 2020 5:34:28 PM Main main
 FINE: Program selected File stream
-мар 02, 2020 5:41:04 PM stackcalculator.StackCalculator calculate
+мар 04, 2020 5:34:28 PM stackcalculator.StackCalculator calculate
 FINE: BufferedReader was created
-мар 02, 2020 5:41:04 PM stackcalculator.Factory <init>
-FINE: InputStream was created
-мар 02, 2020 5:41:04 PM stackcalculator.Factory <init>
-FINE: InputStream was closed successfully 
-мар 02, 2020 5:41:04 PM stackcalculator.Factory createCommand
-FINE: New Command(stackcalculator.commands.Push) was created
-мар 02, 2020 5:41:04 PM stackcalculator.StackCalculator commandExecuting
-FINE: The program started executing the command:stackcalculator.commands.Push
-мар 02, 2020 5:41:04 PM stackcalculator.commands.Push execute
-FINE: Successfully did operation stackcalculator.commands.Push
-мар 02, 2020 5:41:04 PM stackcalculator.Factory createCommand
-FINE: New Command(stackcalculator.commands.Push) was created
-мар 02, 2020 5:41:04 PM stackcalculator.StackCalculator commandExecuting
-FINE: The program started executing the command:stackcalculator.commands.Push
-мар 02, 2020 5:41:04 PM stackcalculator.commands.Push execute
-FINE: Successfully did operation stackcalculator.commands.Push
-мар 02, 2020 5:41:04 PM stackcalculator.Factory createCommand
-WARNING: New Command wasn't created:
-java.lang.NullPointerException
-	at java.lang.Class.forName0(Native Method)
-	at java.lang.Class.forName(Class.java:264)
-	at stackcalculator.Factory.createCommand(Factory.java:59)
+мар 04, 2020 5:34:35 PM stackcalculator.Factory <init>
+WARNING: Config file wasn't opened
+мар 04, 2020 5:35:12 PM stackcalculator.StackCalculator calculate
+WARNING: IOException:
+java.io.IOException: Config file wasn't opened
+	at stackcalculator.Factory.<init>(Factory.java:20)
+	at stackcalculator.Factory.getInstance(Factory.java:49)
 	at stackcalculator.StackCalculator.calculate(StackCalculator.java:45)
 	at Main.main(Main.java:31)
 
-мар 02, 2020 5:41:04 PM stackcalculator.StackCalculator commandExecuting
-WARNING: No such command: knk
-мар 02, 2020 5:41:04 PM stackcalculator.Factory createCommand
-FINE: New Command(stackcalculator.commands.Print) was created
-мар 02, 2020 5:41:04 PM stackcalculator.StackCalculator commandExecuting
-FINE: The program started executing the command:stackcalculator.commands.Print
-мар 02, 2020 5:41:04 PM stackcalculator.commands.Print execute
-FINE: Successfully did operation stackcalculator.commands.Print
-мар 02, 2020 5:41:04 PM stackcalculator.StackCalculator calculate
+мар 04, 2020 5:35:15 PM stackcalculator.StackCalculator calculate
 FINE: BufferedReader was closed
-мар 02, 2020 5:41:05 PM Main main
+мар 04, 2020 5:35:15 PM Main main
 FINE: Successful completion of the calculator

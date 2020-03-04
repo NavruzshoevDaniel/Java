@@ -12,16 +12,19 @@ import java.util.logging.Logger;
 public class Factory {
     private Properties property;
 
-    private Factory() {
+    private Factory() throws IOException {
         InputStream fis = null;
         try {
             fis = getClass().getClassLoader().getResourceAsStream("resources/config.properties");
+            if(fis==null)
+                throw new IOException("Config file wasn't opened");
             logger.log(Level.FINE, "InputStream was created");
             property = new Properties();
             property.load(fis);
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Config file wasn't opened");
+            logger.log(Level.WARNING, "Config file wasn't opened");
             e.printStackTrace();
+            throw e;
         } finally {
             try {
                 if (fis != null) {
@@ -31,15 +34,15 @@ public class Factory {
 
             } catch (IOException ex) {
                 logger.log(Level.WARNING, "The program couldn't close InputStream");
+                throw ex;
             }
         }
-
-    };
+    }
 
     private volatile static Factory instance = null;
     private static Logger logger = Logger.getLogger(Factory.class.getName());
 
-    public static Factory getInstance() {
+    public static Factory getInstance() throws IOException {
         if (instance == null) {
             synchronized (ClassFactory.class) {
                 if (instance == null){
@@ -56,6 +59,8 @@ public class Factory {
 
         try {
             String clazzCommandName = property.getProperty(commandName);
+            if(clazzCommandName==null)
+                return null;
             Class command = Class.forName(clazzCommandName);
             iCommand = (ICommand) command.newInstance();
             logger.log(Level.FINE, "New Command({0}) was created", iCommand.getClass().getName());
