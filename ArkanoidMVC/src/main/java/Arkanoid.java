@@ -9,6 +9,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class Arkanoid extends JFrame {
+
     private static final Logger logger = Logger.getLogger(Arkanoid.class.getName());
 
     public static void main(String[] args) {

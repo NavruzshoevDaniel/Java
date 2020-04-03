@@ -15,7 +15,7 @@ public class Controller implements IController {
         this.model=model;
         view= new View(this.model,this);
         view.createView();
-        model.on();
+        model.init();
     }
 
     @Override

@@ -1,11 +1,19 @@
 package game.components.gui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class StartButton extends JButton {
+    private static final Logger logger = Logger.getLogger(StartButton.class.getName());
+    private ImageIcon imageIcon;
 
     public StartButton() {
+        super();
+        setSettings();
     }
 
     public StartButton(Icon icon) {
@@ -27,8 +35,23 @@ public class StartButton extends JButton {
         super(text, icon);
         setSettings();
     }
-    private void setSettings(){
-        setPreferredSize(new Dimension(200,100));
-        setFont(new Font("Arial",Font.PLAIN,40));
+
+    private void setSettings() {
+        Image image = null;
+
+        try {
+            imageIcon = new ImageIcon();
+            image = ImageIO.read(Background.class.getResourceAsStream("/button.png"));
+            imageIcon.setImage(image);
+        } catch (IOException e) {
+            logger.log(Level.WARNING,"StartButton file doesn't exists",e);
+        }
+
+        setPreferredSize(new Dimension(imageIcon.getIconWidth(), imageIcon.getIconHeight()));
+        setIcon(imageIcon);
+        setContentAreaFilled(false);
+        setBorderPainted(false);
+        setFocusPainted(false);
+        setOpaque(false);
     }
 }

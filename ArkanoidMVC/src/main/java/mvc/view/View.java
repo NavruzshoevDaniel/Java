@@ -1,19 +1,15 @@
 package mvc.view;
 
 
-import game.components.gui.AppFrame;
-import game.components.gui.Board;
-import game.components.gui.StartButton;
+import game.components.gui.*;
 import mvc.controller.Controller;
 import mvc.model.Model;
 import mvc.model.observers.Observer;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,22 +21,17 @@ public class View implements ActionListener, Observer {
     private boolean atomic = false;
     private AppFrame appFrame;
     private JPanel manager;
-    private JPanel startMenu;
+    private Background startMenu;
     private JPanel pauseMenu;
     private Board board;
-    private Image background;
     private StartButton startButton;
-    CardLayout cardLayout;
+    private CardLayout cardLayout;
+
 
 
     public View(Model model, Controller controller) {
         this.model = model;
         this.controller = controller;
-        try {
-            this.background = ImageIO.read(View.class.getResourceAsStream("/bluemoon.png"));
-        } catch (IOException e) {
-            logger.log(Level.WARNING, "Background file doesn't exits", e);
-        }
         model.registerObserver(this);
     }
 
@@ -57,18 +48,16 @@ public class View implements ActionListener, Observer {
         appFrame = new AppFrame();
         board = new Board(model);
         cardLayout = new CardLayout();
-        manager = new JPanel();
-        manager.setLayout(cardLayout);
-
-        startMenu = new JPanel(new GridBagLayout());
-        startButton = new StartButton("Start");
+        manager = new JPanel(cardLayout);
+        startMenu = new Background(new GridBagLayout());
+        startButton = new StartButton();
 
         setLayoutForStartMenu();
-
         manager.add(startMenu, "start");
         manager.add(board, "board");
 
         appFrame.getContentPane().add(manager);
+
         cardLayout.show(manager, "start");
         appFrame.setVisible(true);
     }
@@ -88,6 +77,7 @@ public class View implements ActionListener, Observer {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
 
     }
 

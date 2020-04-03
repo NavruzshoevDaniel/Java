@@ -20,4 +20,12 @@ public class AppFrame extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
     }
+
+    public int getWidth() {
+        return FRAME_WIDTH;
+    }
+
+    public int getHigth() {
+        return FRAME_HIGTH;
+    }
 }

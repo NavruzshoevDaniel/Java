@@ -1,12 +1,9 @@
 package mvc.model;
 
 import game.components.Ball;
-import game.components.Brick;
 import game.components.Plank;
 import mvc.model.observers.Observer;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,19 +14,28 @@ public class Model implements IModel {
     private static final Logger logger =Logger.getLogger(Model.class.getName());
 
     private ArrayList<Observer> observers = new ArrayList<>();
+    private int INIT_BALL_X =500;
+    private int INIT_BALL_Y =450;
+
 
     private Timer timer;
-    private boolean inGame;
+    private State stateGame=State.inStartMenu;
     private Ball ball;
     private Plank plank;
     private int speed = 10;
-    private final int INITIAL_DELAY = 100;
+    private final int INITIAL_DELAY = 0;
     private final int PERIOD_INTERVAL = 25;
 
 
     //Example
-    private Image image = new ImageIcon("resources/ball.png").getImage();
-    private int x, y;
+
+    public Model() {
+        initModel();
+    }
+
+    private void initModel() {
+        this.timer = new Timer();
+    }
 
 
     @Override
@@ -65,7 +71,7 @@ public class Model implements IModel {
     }
 
     @Override
-    public void on() {
+    public void init() {
         timer = new Timer();
         timer.schedule(new ScheduleTask(),INITIAL_DELAY,PERIOD_INTERVAL);
     }
@@ -74,21 +80,38 @@ public class Model implements IModel {
 
     }
 
-    public int getX() {
-        return x;
-    }
 
-    public int getY() {
-        return y;
-    }
 
     private class ScheduleTask extends TimerTask {
 
         @Override
         public void run() {
-            x += 1;
-            y += 1;
+            switch (stateGame){
+                case inGame:{
+
+                    doInGame();
+                    break;
+                }
+                case inPause:{
+
+                    break;
+                }
+                case inStartMenu:{
+
+                    break;
+                }
+
+            }
             notifyObserver();
         }
     }
+
+    private void doInGame() {
+    }
+}
+
+enum State{
+    inStartMenu,
+    inGame,
+    inPause
 }

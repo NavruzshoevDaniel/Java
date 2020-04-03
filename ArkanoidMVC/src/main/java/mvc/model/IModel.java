@@ -9,6 +9,6 @@ public interface IModel {
 
     void notifyObserver();
 
-    void on();
+    void init();
 
 }
