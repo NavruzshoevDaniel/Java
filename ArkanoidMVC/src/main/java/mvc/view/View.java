@@ -1,6 +1,7 @@
 package mvc.view;
 
 
+import game.components.Commons;
 import game.components.gui.*;
 import mvc.controller.Controller;
 import mvc.model.Model;
@@ -26,7 +27,7 @@ public class View implements ActionListener, Observer {
     private Board board;
     private StartButton startButton;
     private CardLayout cardLayout;
-
+    private BallGUI ballGUI;
 
 
     public View(Model model, Controller controller) {
@@ -51,28 +52,47 @@ public class View implements ActionListener, Observer {
         manager = new JPanel(cardLayout);
         startMenu = new Background(new GridBagLayout());
         startButton = new StartButton();
+        ballGUI = new BallGUI(model.getBall().getX(), model.getBall().getY());
+
+        model.setBALL_WIDTH(ballGUI.getImageWidth());
+        model.setBALL_HEIGTH(ballGUI.getImageWidth());
+
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.startGame();
+            }
+        });
 
         setLayoutForStartMenu();
+
         manager.add(startMenu, "start");
-        manager.add(board, "board");
+        manager.add(ballGUI, "board");
 
         appFrame.getContentPane().add(manager);
-
-        cardLayout.show(manager, "start");
         appFrame.setVisible(true);
     }
 
     private void setLayoutForStartMenu() {
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx=0;
-        gridBagConstraints.gridy=0;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
         startMenu.add(startButton, gridBagConstraints);
     }
 
 
     @Override
     public void updateField() {
+        ballGUI.setX(model.getBall().getX());
+        ballGUI.setY(model.getBall().getY());
+        appFrame.repaint();
+        logger.log(Level.INFO, "Ball coords[" + model.getBall().getX() + "] [" + model.getBall().getY() + "]");
+    }
 
+    @Override
+    public void updateStartMenu() {
+        if (cardLayout != null)
+            cardLayout.show(manager, "start");
     }
 
     @Override
@@ -81,4 +101,7 @@ public class View implements ActionListener, Observer {
 
     }
 
+    public void enableGame() {
+        cardLayout.show(manager, "board");
+    }
 }

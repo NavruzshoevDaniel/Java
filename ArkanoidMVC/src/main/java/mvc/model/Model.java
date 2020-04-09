@@ -1,6 +1,7 @@
 package mvc.model;
 
 import game.components.Ball;
+import game.components.Commons;
 import game.components.Plank;
 import mvc.model.observers.Observer;
 
@@ -10,24 +11,32 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Model implements IModel {
-    private static final Logger logger =Logger.getLogger(Model.class.getName());
+public class Model implements IModel, Commons {
+    private static final Logger logger = Logger.getLogger(Model.class.getName());
+
 
     private ArrayList<Observer> observers = new ArrayList<>();
-    private int INIT_BALL_X =500;
-    private int INIT_BALL_Y =450;
-
-
     private Timer timer;
-    private State stateGame=State.inStartMenu;
+    private State stateGame;
     private Ball ball;
     private Plank plank;
-    private int speed = 10;
-    private final int INITIAL_DELAY = 0;
-    private final int PERIOD_INTERVAL = 25;
+    private int BALL_WIDTH;
+    private int BALL_HEIGTH;
 
+    public void setBALL_WIDTH(int BALL_WIDTH) {
+        this.BALL_WIDTH = BALL_WIDTH;
+    }
 
-    //Example
+    public void setBALL_HEIGTH(int BALL_HEIGTH) {
+        this.BALL_HEIGTH = BALL_HEIGTH;
+    }
+
+    public enum State {
+        inStartMenu,
+        inGame,
+        inPause,
+        wait
+    }
 
     public Model() {
         initModel();
@@ -35,6 +44,17 @@ public class Model implements IModel {
 
     private void initModel() {
         this.timer = new Timer();
+        ball =new Ball(INIT_BALL_X,INIT_BALL_Y);
+        plank= new Plank(INIT_PLANK_X,INIT_PLANK_Y);
+        stateGame=State.inStartMenu;
+    }
+
+    public Ball getBall() {
+        return ball;
+    }
+
+    public void setStateGame(State stateGame) {
+        this.stateGame = stateGame;
     }
 
 
@@ -48,7 +68,7 @@ public class Model implements IModel {
             throw new IllegalArgumentException("Repeated observer:" + observer);
         }
         observers.add(observer);
-        logger.log(Level.INFO,"New observer subscribed: "+observer);
+        logger.log(Level.INFO, "New observer subscribed: " + observer);
     }
 
     @Override
@@ -60,58 +80,82 @@ public class Model implements IModel {
             throw new IllegalArgumentException("Repeated observer:" + observer);
         }
         observers.remove(observer);
-        logger.log(Level.INFO,"Observer unsubscribed: "+observer);
+        logger.log(Level.INFO, "Observer unsubscribed: " + observer);
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyGameObserver() {
         for (Observer obser : observers) {
             obser.updateField();
         }
     }
 
     @Override
+    public void notifyStartMenu() {
+        for (Observer obser : observers) {
+            obser.updateStartMenu();
+        }
+    }
+
+    @Override
     public void init() {
         timer = new Timer();
-        timer.schedule(new ScheduleTask(),INITIAL_DELAY,PERIOD_INTERVAL);
+        timer.schedule(new ScheduleTask(), INITIAL_DELAY, PERIOD);
     }
-
-    private void updateBall() {
-
-    }
-
 
 
     private class ScheduleTask extends TimerTask {
 
         @Override
         public void run() {
-            switch (stateGame){
-                case inGame:{
-
+            switch (stateGame) {
+                case inGame: {
                     doInGame();
+                    notifyGameObserver();
                     break;
                 }
-                case inPause:{
+                case inPause: {
 
                     break;
                 }
-                case inStartMenu:{
-
+                case inStartMenu: {
+                    logger.log(Level.INFO, "In Start Menu");
+                    notifyStartMenu();
+                    stateGame = State.wait;
+                    logger.log(Level.INFO, "Out Start Menu");
                     break;
                 }
+                default:
 
             }
-            notifyObserver();
         }
     }
 
     private void doInGame() {
+        updateBall();
     }
+
+    private void updateBall() {
+        ball.move();
+
+        if(ball.getX()<0){
+
+            ball.setDirectionX(1);
+        }
+
+        if(ball.getX()>BOARD_WIDTH-BALL_WIDTH){
+            ball.setDirectionX(-1);
+        }
+
+        if(ball.getY()<0){
+            ball.setDirectionY(1);
+        }
+
+        if (ball.getY()>BOARD_HEIGHT-BALL_HEIGTH){
+            ball.setDirectionY(-1);
+        }
+
+    }
+
 }
 
-enum State{
-    inStartMenu,
-    inGame,
-    inPause
-}

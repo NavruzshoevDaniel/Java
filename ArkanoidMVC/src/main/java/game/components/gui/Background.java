@@ -13,8 +13,9 @@ public class Background extends JPanel {
 
     public Background(LayoutManager layout) {
         super(layout);
-        if (image == null)
+        if (image == null){
             init();
+        }
     }
 
     public Background() {
@@ -32,6 +33,7 @@ public class Background extends JPanel {
         setMinimumSize(size);
         setMaximumSize(size);
         setSize(size);
+        setBackground(Color.BLACK);
     }
 
     @Override

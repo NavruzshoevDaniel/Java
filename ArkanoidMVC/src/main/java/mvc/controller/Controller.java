@@ -20,7 +20,8 @@ public class Controller implements IController {
 
     @Override
     public void startGame() {
-
+        model.setStateGame(Model.State.inGame);
+        view.enableGame();
     }
 
     @Override

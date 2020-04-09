@@ -7,7 +7,9 @@ public interface IModel {
 
     void removeObserver(Observer observer);
 
-    void notifyObserver();
+    void notifyGameObserver();
+
+    void notifyStartMenu();
 
     void init();
 
