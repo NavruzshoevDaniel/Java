@@ -27,19 +27,12 @@ public class BallGUI extends JPanel {
             image = ImageIO.read(BallGUI.class.getResourceAsStream("/ball.png"));
             width = image.getWidth(null);
             height = image.getHeight(null);
+            setBounds(x,y,width,height);
         } catch (IOException e) {
-            e.printStackTrace();
             logger.log(Level.WARNING, "Ball GUI image doesn't exits", e);
         }
     }
 
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        logger.log(Level.INFO,getWidth()+" "+getHeight()+":"+getImageWidth()+" "+getImageHeight());
-        g.drawImage(image, x, y, null);
-    }
 
 
     public int getImageWidth() {
@@ -56,5 +49,17 @@ public class BallGUI extends JPanel {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

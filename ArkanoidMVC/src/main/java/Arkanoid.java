@@ -3,12 +3,11 @@
 import mvc.controller.Controller;
 import mvc.model.Model;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-public class Arkanoid extends JFrame {
+public class Arkanoid {
 
     private static final Logger logger = Logger.getLogger(Arkanoid.class.getName());
 

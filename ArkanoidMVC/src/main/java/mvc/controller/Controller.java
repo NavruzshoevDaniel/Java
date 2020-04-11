@@ -3,6 +3,7 @@ package mvc.controller;
 import mvc.model.Model;
 import mvc.view.View;
 
+import java.awt.event.KeyEvent;
 import java.util.logging.Logger;
 
 public class Controller implements IController {
@@ -37,5 +38,29 @@ public class Controller implements IController {
     @Override
     public void endGame() {
 
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+        int key = keyEvent.getKeyCode();
+
+        if (key == KeyEvent.VK_LEFT) {
+           model.getPlank().setDx(-1);
+        }
+        if (key == KeyEvent.VK_RIGHT) {
+            model.getPlank().setDx(1);
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+        int key = keyEvent.getKeyCode();
+
+        if (key == KeyEvent.VK_LEFT) {
+            model.getPlank().setDx(0);
+        }
+        if (key == KeyEvent.VK_RIGHT) {
+            model.getPlank().setDx(0);
+        }
     }
 }

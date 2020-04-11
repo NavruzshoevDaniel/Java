@@ -1,7 +1,6 @@
 package mvc.view;
 
 
-import game.components.Commons;
 import game.components.gui.*;
 import mvc.controller.Controller;
 import mvc.model.Model;
@@ -9,17 +8,16 @@ import mvc.model.observers.Observer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class View implements ActionListener, Observer {
+public class View implements Observer {
     private static final Logger logger = Logger.getLogger(View.class.getName());
     private Model model;
     private Controller controller;
 
-    private boolean atomic = false;
     private AppFrame appFrame;
     private JPanel manager;
     private Background startMenu;
@@ -28,6 +26,7 @@ public class View implements ActionListener, Observer {
     private StartButton startButton;
     private CardLayout cardLayout;
     private BallGUI ballGUI;
+    private PlankGUI plankGUI;
 
 
     public View(Model model, Controller controller) {
@@ -47,27 +46,30 @@ public class View implements ActionListener, Observer {
 
     private void setSwingSettings() {
         appFrame = new AppFrame();
-        board = new Board(model);
         cardLayout = new CardLayout();
         manager = new JPanel(cardLayout);
         startMenu = new Background(new GridBagLayout());
         startButton = new StartButton();
         ballGUI = new BallGUI(model.getBall().getX(), model.getBall().getY());
+        plankGUI = new PlankGUI(model.getPlank().getX(),model.getPlank().getY());
+        board = new Board(ballGUI,plankGUI);
+
+        manager.setFocusable(true);
+
+        board.setFocusable(true);
+        board.addKeyListener(new ViewAdapter());
 
         model.setBALL_WIDTH(ballGUI.getImageWidth());
         model.setBALL_HEIGTH(ballGUI.getImageWidth());
+        model.setPLANK_HEIGTH(plankGUI.getHeight());
+        model.setPLANK_WIDTH(plankGUI.getWidth());
 
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.startGame();
-            }
-        });
+        startButton.addActionListener(e -> controller.startGame());
 
         setLayoutForStartMenu();
 
         manager.add(startMenu, "start");
-        manager.add(ballGUI, "board");
+        manager.add(board, "board");
 
         appFrame.getContentPane().add(manager);
         appFrame.setVisible(true);
@@ -85,8 +87,12 @@ public class View implements ActionListener, Observer {
     public void updateField() {
         ballGUI.setX(model.getBall().getX());
         ballGUI.setY(model.getBall().getY());
+        plankGUI.setX(model.getPlank().getX());
+        plankGUI.setY(model.getPlank().getY());
+
         appFrame.repaint();
-        logger.log(Level.INFO, "Ball coords[" + model.getBall().getX() + "] [" + model.getBall().getY() + "]");
+       //logger.log(Level.INFO, "Ball coords[" + model.getBall().getX() + "] [" + model.getBall().getY() + "]");
+        model.setChanged(false);
     }
 
     @Override
@@ -95,13 +101,25 @@ public class View implements ActionListener, Observer {
             cardLayout.show(manager, "start");
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-
-    }
-
     public void enableGame() {
         cardLayout.show(manager, "board");
+    }
+
+    private class ViewAdapter extends KeyAdapter {
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            super.keyPressed(e);
+            logger.log(Level.INFO,"IN KEY PRESSED");
+            controller.keyPressed(e);
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            super.keyReleased(e);
+            logger.log(Level.INFO,"IN KEY RELEASED");
+            controller.keyReleased(e);
+        }
     }
 }

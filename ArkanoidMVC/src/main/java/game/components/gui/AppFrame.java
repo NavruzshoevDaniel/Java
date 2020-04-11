@@ -1,12 +1,14 @@
 package game.components.gui;
 
+import game.components.Commons;
+
 import javax.swing.*;
 
 
 
 public class AppFrame extends JFrame {
-    private final int FRAME_WIDTH = 1000;
-    private final int FRAME_HIGTH = 700;
+    private final int FRAME_WIDTH = Commons.BOARD_WIDTH;
+    private final int FRAME_HIGTH = Commons.BOARD_HEIGHT;
     private final String FRAME_NAME = "Arkanoid";
 
     public AppFrame() {
