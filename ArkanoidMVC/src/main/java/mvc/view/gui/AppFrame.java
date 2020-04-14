@@ -1,10 +1,8 @@
-package game.components.gui;
+package mvc.view.gui;
 
-import game.components.Commons;
+import mvc.model.game.components.Commons;
 
 import javax.swing.*;
-
-
 
 public class AppFrame extends JFrame {
     private final int FRAME_WIDTH = Commons.BOARD_WIDTH;

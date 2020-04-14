@@ -1,14 +1,18 @@
-package game.components;
+package mvc.model.game.components;
 
+
+import java.awt.*;
 
 public class Sprite{
+    protected Rectangle area;
     protected int x;
     protected int y;
     protected boolean visible;
 
-    public Sprite(int x, int y) {
+    public Sprite(int x, int y,int width,int hiegth) {
         this.x = x;
         this.y = y;
+        area= new Rectangle(x,y,width,hiegth);
     }
 
     public int getX() {

@@ -1,4 +1,4 @@
-package game.components.gui;
+package mvc.view.gui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -37,7 +37,7 @@ public class StartButton extends JButton {
     }
 
     private void setSettings() {
-        Image image = null;
+        Image image ;
 
         try {
             imageIcon = new ImageIcon();

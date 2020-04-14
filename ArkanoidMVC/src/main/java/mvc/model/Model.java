@@ -1,10 +1,9 @@
 package mvc.model;
 
-import game.components.Ball;
-import game.components.Commons;
-import game.components.Plank;
+import mvc.model.game.components.*;
 import mvc.model.observers.Observer;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,18 +19,13 @@ public class Model implements IModel, Commons {
     private State stateGame;
     private Ball ball;
     private Plank plank;
-    private int BALL_WIDTH;
-    private int PLANK_WIDTH;
-    private int BALL_HEIGTH;
-    private int PLANK_HEIGTH;
-
-    public void setBALL_WIDTH(int BALL_WIDTH) {
-        this.BALL_WIDTH = BALL_WIDTH;
-    }
-
-    public void setBALL_HEIGTH(int BALL_HEIGTH) {
-        this.BALL_HEIGTH = BALL_HEIGTH;
-    }
+    private Wall wall;
+    private int countBrickWidth=6;
+    private int countBrickHeigth=5;
+    private int BALL_WIDTH=50;
+    private int PLANK_WIDTH=200;
+    private int BALL_HEIGTH=50;
+    private int PLANK_HEIGTH=21;
 
     public void setChanged(boolean changed) {
         this.changed = changed;
@@ -41,12 +35,20 @@ public class Model implements IModel, Commons {
         return plank;
     }
 
-    public void setPLANK_WIDTH(int PLANK_WIDTH) {
-        this.PLANK_WIDTH = PLANK_WIDTH;
+    public int getBALL_WIDTH() {
+        return BALL_WIDTH;
     }
 
-    public void setPLANK_HEIGTH(int PLANK_HEIGTH) {
-        this.PLANK_HEIGTH = PLANK_HEIGTH;
+    public int getPLANK_WIDTH() {
+        return PLANK_WIDTH;
+    }
+
+    public int getBALL_HEIGTH() {
+        return BALL_HEIGTH;
+    }
+
+    public int getPLANK_HEIGTH() {
+        return PLANK_HEIGTH;
     }
 
     public enum State {
@@ -62,9 +64,11 @@ public class Model implements IModel, Commons {
 
     private void initModel() {
         this.timer = new Timer();
-        ball = new Ball(INIT_BALL_X, INIT_BALL_Y);
-        plank = new Plank(INIT_PLANK_X, INIT_PLANK_Y);
+        ball = new Ball(INIT_BALL_X, INIT_BALL_Y,BALL_WIDTH,BALL_HEIGTH);
+        plank = new Plank(INIT_PLANK_X, INIT_PLANK_Y,PLANK_WIDTH,PLANK_HEIGTH);
         stateGame = State.inStartMenu;
+        Rectangle wallArea= new Rectangle(50,50,900,230);
+        wall= new Wall(wallArea,countBrickWidth,countBrickHeigth,3,3);
     }
 
     public Ball getBall() {

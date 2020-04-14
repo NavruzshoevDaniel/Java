@@ -46,9 +46,11 @@ public class Controller implements IController {
 
         if (key == KeyEvent.VK_LEFT) {
            model.getPlank().setDx(-1);
+            model.getPlank().setInMove(true);
         }
         if (key == KeyEvent.VK_RIGHT) {
             model.getPlank().setDx(1);
+            model.getPlank().setInMove(true);
         }
     }
 
@@ -58,9 +60,11 @@ public class Controller implements IController {
 
         if (key == KeyEvent.VK_LEFT) {
             model.getPlank().setDx(0);
+            model.getPlank().setInMove(false);
         }
         if (key == KeyEvent.VK_RIGHT) {
             model.getPlank().setDx(0);
+            model.getPlank().setInMove(false);
         }
     }
 }

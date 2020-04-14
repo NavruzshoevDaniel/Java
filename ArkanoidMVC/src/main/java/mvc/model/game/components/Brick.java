@@ -1,10 +1,10 @@
-package game.components;
+package mvc.model.game.components;
 
 public class Brick extends Sprite {
     private boolean destroyed;
 
-    public Brick(int x, int y) {
-        super(x, y);
+    public Brick(int x, int y,int width,int hiegth) {
+        super(x, y,width,hiegth);
         destroyed=false;
     }
 

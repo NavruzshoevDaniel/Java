@@ -1,4 +1,4 @@
-package game.components;
+package mvc.model.game.components;
 
 public class Ball extends Sprite {
 
@@ -6,8 +6,8 @@ public class Ball extends Sprite {
     private int directionX = 1;
     private int directionY = 1;
 
-    public Ball(int x, int y) {
-        super(x, y);
+    public Ball(int x, int y,int width,int hiegth) {
+        super(x, y,width,hiegth);
     }
 
     public void move(){

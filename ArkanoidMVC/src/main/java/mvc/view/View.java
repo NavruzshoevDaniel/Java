@@ -1,7 +1,7 @@
 package mvc.view;
 
 
-import game.components.gui.*;
+import mvc.view.gui.*;
 import mvc.controller.Controller;
 import mvc.model.Model;
 import mvc.model.observers.Observer;
@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,8 +26,9 @@ public class View implements Observer {
     private Board board;
     private StartButton startButton;
     private CardLayout cardLayout;
-    private BallGUI ballGUI;
-    private PlankGUI plankGUI;
+    private GuiComponent ballGUI;
+    private GuiComponent plankGUI;
+    private ArrayList<GuiComponent> brickGUIS;
 
 
     public View(Model model, Controller controller) {
@@ -50,19 +52,13 @@ public class View implements Observer {
         manager = new JPanel(cardLayout);
         startMenu = new Background(new GridBagLayout());
         startButton = new StartButton();
-        ballGUI = new BallGUI(model.getBall().getX(), model.getBall().getY());
-        plankGUI = new PlankGUI(model.getPlank().getX(),model.getPlank().getY());
-        board = new Board(ballGUI,plankGUI);
+        ballGUI = new GuiComponent("/ball.png",model.getBALL_WIDTH(),model.getBALL_HEIGTH());
+        plankGUI = new GuiComponent("/plank.png",model.getPLANK_WIDTH(),model.getPLANK_HEIGTH());
+        brickGUIS=new ArrayList<>();
+        initStartCoords();
+        board = new Board(ballGUI, plankGUI,brickGUIS);
 
-        manager.setFocusable(true);
-
-        board.setFocusable(true);
         board.addKeyListener(new ViewAdapter());
-
-        model.setBALL_WIDTH(ballGUI.getImageWidth());
-        model.setBALL_HEIGTH(ballGUI.getImageWidth());
-        model.setPLANK_HEIGTH(plankGUI.getHeight());
-        model.setPLANK_WIDTH(plankGUI.getWidth());
 
         startButton.addActionListener(e -> controller.startGame());
 
@@ -73,6 +69,15 @@ public class View implements Observer {
 
         appFrame.getContentPane().add(manager);
         appFrame.setVisible(true);
+    }
+
+    private void initStartCoords() {
+        ballGUI.setX(model.getBall().getX());
+        ballGUI.setY(model.getBall().getY());
+
+        plankGUI.setX(model.getPlank().getX());
+        plankGUI.setY(model.getPlank().getY());
+
     }
 
     private void setLayoutForStartMenu() {
@@ -91,7 +96,6 @@ public class View implements Observer {
         plankGUI.setY(model.getPlank().getY());
 
         appFrame.repaint();
-       //logger.log(Level.INFO, "Ball coords[" + model.getBall().getX() + "] [" + model.getBall().getY() + "]");
         model.setChanged(false);
     }
 
@@ -103,6 +107,7 @@ public class View implements Observer {
 
     public void enableGame() {
         cardLayout.show(manager, "board");
+        board.requestFocusInWindow();
     }
 
     private class ViewAdapter extends KeyAdapter {
@@ -110,7 +115,7 @@ public class View implements Observer {
         @Override
         public void keyPressed(KeyEvent e) {
             super.keyPressed(e);
-            logger.log(Level.INFO,"IN KEY PRESSED");
+            logger.log(Level.INFO, "IN KEY PRESSED");
             controller.keyPressed(e);
 
         }
@@ -118,7 +123,7 @@ public class View implements Observer {
         @Override
         public void keyReleased(KeyEvent e) {
             super.keyReleased(e);
-            logger.log(Level.INFO,"IN KEY RELEASED");
+            logger.log(Level.INFO, "IN KEY RELEASED");
             controller.keyReleased(e);
         }
     }

@@ -1,4 +1,4 @@
-package game.components.gui;
+package mvc.view.gui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
