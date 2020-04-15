@@ -20,12 +20,9 @@ public class Model implements IModel, Commons {
     private Ball ball;
     private Plank plank;
     private Wall wall;
-    private int countBrickWidth=6;
-    private int countBrickHeigth=5;
-    private int BALL_WIDTH=50;
-    private int PLANK_WIDTH=200;
-    private int BALL_HEIGTH=50;
-    private int PLANK_HEIGTH=21;
+    private int countBrickWidth = 10;
+    private int countBrickHeigth = 5;
+    private boolean ballStart;
 
     public void setChanged(boolean changed) {
         this.changed = changed;
@@ -51,6 +48,18 @@ public class Model implements IModel, Commons {
         return PLANK_HEIGTH;
     }
 
+    public Wall getWall() {
+        return wall;
+    }
+
+    public void setBallStart(boolean ballStart) {
+        this.ballStart = ballStart;
+    }
+
+    public boolean isBallStart() {
+        return ballStart;
+    }
+
     public enum State {
         inStartMenu,
         inGame,
@@ -64,11 +73,12 @@ public class Model implements IModel, Commons {
 
     private void initModel() {
         this.timer = new Timer();
-        ball = new Ball(INIT_BALL_X, INIT_BALL_Y,BALL_WIDTH,BALL_HEIGTH);
-        plank = new Plank(INIT_PLANK_X, INIT_PLANK_Y,PLANK_WIDTH,PLANK_HEIGTH);
+        ball = new Ball(INIT_BALL_X, INIT_BALL_Y, BALL_WIDTH, BALL_HEIGTH);
+        plank = new Plank(INIT_PLANK_X, INIT_PLANK_Y, PLANK_WIDTH, PLANK_HEIGTH);
         stateGame = State.inStartMenu;
-        Rectangle wallArea= new Rectangle(50,50,900,230);
-        wall= new Wall(wallArea,countBrickWidth,countBrickHeigth,3,3);
+        Rectangle wallArea = new Rectangle(INIT_WALL_X, INIT_WALL_Y, BOARD_WIDTH - 2 * INIT_WALL_X, BOARD_HEIGHT / 4);
+        wall = new Wall(wallArea, countBrickWidth, countBrickHeigth, OFFSET_BRICKS, OFFSET_BRICKS);
+        ballStart = false;
     }
 
     public Ball getBall() {
@@ -106,23 +116,36 @@ public class Model implements IModel, Commons {
     }
 
     @Override
-    public void notifyGameObserver() {
+    public void notifyGameObserver(Operation operation, Object arg) {
         for (Observer obser : observers) {
-            obser.updateField();
-        }
-    }
+            switch (operation) {
+                case ALL: {
+                    obser.updateField();
+                    break;
+                }
+                case BALL: {
+                    obser.updateBall();
+                    break;
+                }
+                case WALL: {
+                    obser.updateWall((Integer) arg);
+                    break;
+                }
+                case PLANK: {
 
-    @Override
-    public void notifyStartMenu() {
-        for (Observer obser : observers) {
-            obser.updateStartMenu();
+                }
+                case START_MENU: {
+                    obser.updateStartMenu();
+                    break;
+                }
+            }
         }
     }
 
     @Override
     public void init() {
         timer = new Timer();
-        timer.schedule(new ScheduleTask(), INITIAL_DELAY, PERIOD);
+        timer.scheduleAtFixedRate(new ScheduleTask(), INITIAL_DELAY, PERIOD);
     }
 
 
@@ -133,9 +156,9 @@ public class Model implements IModel, Commons {
             switch (stateGame) {
                 case inGame: {
                     doInGame();
-                    if (!changed){
-                        changed=true;
-                        notifyGameObserver();
+                    if (!changed) {
+                        changed = true;
+                        notifyGameObserver(Operation.ALL, null);
                     }
                     break;
                 }
@@ -145,7 +168,7 @@ public class Model implements IModel, Commons {
                 }
                 case inStartMenu: {
                     logger.log(Level.INFO, "In Start Menu");
-                    notifyStartMenu();
+                    notifyGameObserver(Operation.START_MENU, null);
                     stateGame = State.wait;
                     logger.log(Level.INFO, "Out Start Menu");
                     break;
@@ -159,39 +182,106 @@ public class Model implements IModel, Commons {
     private void doInGame() {
         updateBall();
         updatePlank();
+        checkCollision();
+    }
+
+    private void checkCollision() {
+
+        checkBallAndPlank();
+
+        checkBallAndBricks();
+    }
+
+    private void checkBallAndBricks() {
+        for (int i = 0; i < wall.getCount(); i++) {
+            ArrayList<Brick> bricks = wall.getBricks();
+            if (ball.getArea().intersects(bricks.get(i).getArea())) {
+                int ballLeft = (int) ball.getArea().getMinX();
+                int ballTop = (int) ball.getArea().getMinY();
+
+                Point pointRight = new Point(ballLeft + ball.getWidth() + 1, ballTop);
+                Point pointLeft = new Point(ballLeft - 1, ballTop);
+                Point pointTop = new Point(ballLeft, ballTop - 1);
+                Point pointBottom = new Point(ballLeft, ballTop + ball.getHiegth() + 1);
+
+                if (!bricks.get(i).isDestroyed()) {
+                    if (bricks.get(i).getArea().contains(pointTop)
+                            || bricks.get(i).getArea().contains(pointBottom)) {
+                        ball.setDirectionY(-1 * ball.getDirectionY());
+                    } else if (bricks.get(i).getArea().contains(pointRight)
+                            || bricks.get(i).getArea().contains(pointLeft)) {
+                        ball.setDirectionX(-1 * ball.getDirectionX());
+                    }
+                    notifyGameObserver(Operation.WALL, i);
+                    bricks.get(i).setDestroyed(true);
+                }
+            }
+        }
+    }
+
+    private void checkBallAndPlank() {
+        if (ball.getArea().intersects(plank.getArea()) && plank.isInMove()) {
+
+            ball.setDirectionY(-1 * ball.getDirectionY());
+
+            if (plank.getDx() == -1) {
+                ball.setDirectionX(-1 * ball.getDirectionX());
+            } else {
+                ball.setDirectionX(Math.abs(ball.getDirectionX()));
+            }
+
+        }
+        if (ball.getArea().intersects(plank.getArea()) && !plank.isInMove()) {
+            ball.setDirectionY(-1 * ball.getDirectionY());
+        }
     }
 
     private void updatePlank() {
         plank.move();
-        if(plank.getX()<0){
+        if (plank.getX() < 0) {
             plank.setX(0);
         }
-        if (plank.getX()>BOARD_WIDTH-PLANK_WIDTH){
-            plank.setX(BOARD_WIDTH-PLANK_WIDTH);
+        if (plank.getX() > BOARD_WIDTH - PLANK_WIDTH) {
+            plank.setX(BOARD_WIDTH - PLANK_WIDTH);
         }
     }
 
     private void updateBall() {
-        ball.move();
-
-        if (ball.getX() < 0) {
-
-            ball.setDirectionX(1);
+        if (ballStart) {
+            ball.move();
+        } else {
+            int plankX = plank.getX();
+            int plankY = plank.getY();
+            ball.setX(plankX + plank.getWidth() / 2 - ball.getWidth() / 2);
+            ball.setY(plankY - ball.getHiegth());
         }
 
-        if (ball.getX() > BOARD_WIDTH - BALL_WIDTH) {
-            ball.setDirectionX(-1);
+
+        int ballX = ball.getX();
+        int ballY = ball.getY();
+
+        if (ballX < 0 || ballX > BOARD_WIDTH - BALL_WIDTH) {
+
+            ball.setDirectionX(ball.getDirectionX() * (-1));
         }
 
-        if (ball.getY() < 0) {
-            ball.setDirectionY(1);
+        if (ballY < 0) {
+            ball.setDirectionY(ball.getDirectionY() * (-1));
         }
 
-        if (ball.getY() > BOARD_HEIGHT - BALL_HEIGTH) {
+        if (ballY > BOARD_HEIGHT - BALL_HEIGTH) {
             ball.setDirectionY(-1);
         }
 
     }
 
+
+    public enum Operation {
+        ALL,
+        BALL,
+        WALL,
+        PLANK,
+        START_MENU
+    }
 }
 

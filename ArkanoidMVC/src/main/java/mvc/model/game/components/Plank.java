@@ -25,4 +25,8 @@ public class Plank extends Sprite {
     public void setInMove(boolean inMove) {
         this.inMove = inMove;
     }
+
+    public int getDx() {
+        return dx;
+    }
 }

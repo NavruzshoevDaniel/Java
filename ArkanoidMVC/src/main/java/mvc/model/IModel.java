@@ -7,9 +7,7 @@ public interface IModel {
 
     void removeObserver(Observer observer);
 
-    void notifyGameObserver();
-
-    void notifyStartMenu();
+    void notifyGameObserver(Model.Operation operation, Object arg);
 
     void init();
 

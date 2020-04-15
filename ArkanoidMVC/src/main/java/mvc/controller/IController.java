@@ -1,6 +1,7 @@
 package mvc.controller;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 public interface IController {
     void startGame();
@@ -9,4 +10,5 @@ public interface IController {
     void endGame();
     void keyPressed(KeyEvent keyEvent);
     void keyReleased(KeyEvent keyEvent);
+    void chooseDirection(MouseEvent keyEvent);
 }

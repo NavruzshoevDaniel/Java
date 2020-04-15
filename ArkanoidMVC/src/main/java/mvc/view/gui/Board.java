@@ -30,7 +30,6 @@ public class Board extends JPanel {
             logger.log(Level.WARNING, "Board background file doesn't exits", e);
         }
         setPreferredSize(new Dimension(Commons.BOARD_WIDTH, Commons.BOARD_HEIGHT));
-
     }
 
 
@@ -41,8 +40,12 @@ public class Board extends JPanel {
         g.drawImage(ballGUI.getImage(), ballGUI.getX(), ballGUI.getY(), null);
         g.drawImage(plankGUI.getImage(), plankGUI.getX(), plankGUI.getY(), null);
         for (GuiComponent brick:brickGUIS) {
-            g.drawImage(brick.getImage(),brick.getX(),brick.getY(),null);
+            if (brick.isVisible()){
+                g.drawImage(brick.getImage(),brick.getX(),brick.getY(),null);
+            }
+
         }
+        Toolkit.getDefaultToolkit().sync();
     }
 
 

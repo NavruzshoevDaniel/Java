@@ -5,9 +5,11 @@ public class Ball extends Sprite {
     private int BALL_SPEED = 2;
     private int directionX = 1;
     private int directionY = 1;
+    private boolean isMove;
 
     public Ball(int x, int y,int width,int hiegth) {
         super(x, y,width,hiegth);
+        this.isMove=false;
     }
 
     public void move(){

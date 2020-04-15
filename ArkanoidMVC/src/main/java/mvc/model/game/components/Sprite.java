@@ -7,12 +7,15 @@ public class Sprite{
     protected Rectangle area;
     protected int x;
     protected int y;
+    protected int width;
+    protected int hiegth;
     protected boolean visible;
 
     public Sprite(int x, int y,int width,int hiegth) {
         this.x = x;
         this.y = y;
-        area= new Rectangle(x,y,width,hiegth);
+        this.width=width;
+        this.hiegth=hiegth;
     }
 
     public int getX() {
@@ -37,5 +40,17 @@ public class Sprite{
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public Rectangle getArea() {
+        return new Rectangle(x,y,width,hiegth);
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHiegth() {
+        return hiegth;
     }
 }
