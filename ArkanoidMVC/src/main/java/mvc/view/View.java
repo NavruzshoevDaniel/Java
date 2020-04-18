@@ -25,13 +25,16 @@ public class View implements Observer {
     private AppFrame appFrame;
     private JPanel manager;
     private Background startMenu;
-    private JPanel pauseMenu;
     private Board board;
     private StartButton startButton;
+    private BackButton backButton;
     private CardLayout cardLayout;
     private GuiComponent ballGUI;
     private GuiComponent plankGUI;
     private ArrayList<GuiComponent> brickGUIS;
+    private EndGame endGame;
+    private int endGameWidth = 550;
+    private int endGameHiegth = 366;
 
 
     public View(Model model, Controller controller) {
@@ -50,30 +53,43 @@ public class View implements Observer {
     }
 
     private void setSwingSettings() {
+        logger.log(Level.INFO,"START SET SWINGS");
         appFrame = new AppFrame();
         cardLayout = new CardLayout();
         manager = new JPanel(cardLayout);
         startMenu = new Background(new GridBagLayout());
         startButton = new StartButton();
+
+        setLayoutForStartMenu();
+
+
+        startButton.addActionListener(e -> controller.startGame());
+        manager.add(startMenu, "start");
+        appFrame.getContentPane().add(manager);
+        appFrame.setVisible(true);
+        logger.log(Level.INFO,"MENU HAS JUST CREATED");
+
         ballGUI = new GuiComponent("/ball.png", model.getBALL_WIDTH(), model.getBALL_HEIGTH());
         plankGUI = new GuiComponent("/plank.png", model.getPLANK_WIDTH(), model.getPLANK_HEIGTH());
         brickGUIS = new ArrayList<>();
+        backButton = new BackButton();
+        endGame = new EndGame(backButton,endGameWidth,endGameHiegth);
+        logger.log(Level.INFO,"ALL GUI COMPONENTS ALLOC");
+
         initBricks();
         updateCoords();
         board = new Board(ballGUI, plankGUI, brickGUIS);
+        logger.log(Level.INFO,"BOARD INIT");
 
         board.addKeyListener(new ViewKeyAdapter());
         board.addMouseListener(new ViewMouseAdapter());
 
-        startButton.addActionListener(e -> controller.startGame());
+        backButton.addActionListener(e -> cardLayout.show(manager,"start"));
 
-        setLayoutForStartMenu();
-
-        manager.add(startMenu, "start");
         manager.add(board, "board");
+        manager.add(endGame, "endGame");
 
-        appFrame.getContentPane().add(manager);
-        appFrame.setVisible(true);
+        logger.log(Level.INFO,"END SET SWINGS");
     }
 
     private void initBricks() {
@@ -83,7 +99,6 @@ public class View implements Observer {
         for (int i = 0; i < model.getWall().getCount(); i++) {
             brickGUIS.add(i, new GuiComponent("/brick.png", brickWidth, brickHeight));
         }
-
 
     }
 
@@ -99,7 +114,7 @@ public class View implements Observer {
         Wall wallModel = model.getWall();
 
         for (int i = 0; i < model.getWall().getCount(); i++) {
-            if(!wallModel.getBricks().get(i).isDestroyed()){
+            if (!wallModel.getBricks().get(i).isDestroyed()) {
                 brickGUIS.get(i).setX(wallModel.getBricks().get(i).getX());
                 brickGUIS.get(i).setY(wallModel.getBricks().get(i).getY());
             }
@@ -157,6 +172,23 @@ public class View implements Observer {
     public void updateStartMenu() {
         if (cardLayout != null)
             cardLayout.show(manager, "start");
+    }
+
+    @Override
+    public void win() {
+        endGame.setWin();
+        cardLayout.show(manager, "endGame");
+    }
+
+    @Override
+    public void lose() {
+        endGame.setLose();
+        cardLayout.show(manager, "endGame");
+    }
+
+    @Override
+    public void reset() {
+        board.resetBricks();
     }
 
     public void enableGame() {

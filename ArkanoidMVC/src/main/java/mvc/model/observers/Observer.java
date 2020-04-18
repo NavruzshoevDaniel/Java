@@ -6,4 +6,7 @@ public interface Observer {
     void updateBall();
     void updatePlank();
     void updateStartMenu();
+    void win();
+    void lose();
+    void reset();
 }

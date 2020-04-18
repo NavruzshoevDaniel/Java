@@ -22,7 +22,9 @@ public class Model implements IModel, Commons {
     private Wall wall;
     private int countBrickWidth = 10;
     private int countBrickHeigth = 5;
+    private int countDestroyed;
     private boolean ballStart;
+    private boolean win;
 
     public void setChanged(boolean changed) {
         this.changed = changed;
@@ -63,7 +65,7 @@ public class Model implements IModel, Commons {
     public enum State {
         inStartMenu,
         inGame,
-        inPause,
+        endGame,
         wait
     }
 
@@ -79,6 +81,8 @@ public class Model implements IModel, Commons {
         Rectangle wallArea = new Rectangle(INIT_WALL_X, INIT_WALL_Y, BOARD_WIDTH - 2 * INIT_WALL_X, BOARD_HEIGHT / 4);
         wall = new Wall(wallArea, countBrickWidth, countBrickHeigth, OFFSET_BRICKS, OFFSET_BRICKS);
         ballStart = false;
+        countDestroyed = 0;
+        win = false;
     }
 
     public Ball getBall() {
@@ -132,10 +136,23 @@ public class Model implements IModel, Commons {
                     break;
                 }
                 case PLANK: {
-
+                    obser.updatePlank();
+                    break;
                 }
                 case START_MENU: {
                     obser.updateStartMenu();
+                    break;
+                }
+                case WIN: {
+                    obser.win();
+                    break;
+                }
+                case LOSE: {
+                    obser.lose();
+                    break;
+                }
+                case RESET: {
+                    obser.reset();
                     break;
                 }
             }
@@ -162,8 +179,14 @@ public class Model implements IModel, Commons {
                     }
                     break;
                 }
-                case inPause: {
-
+                case endGame: {
+                    if (win) {
+                        notifyGameObserver(Operation.WIN, null);
+                    } else {
+                        notifyGameObserver(Operation.LOSE, null);
+                    }
+                    stateGame = State.wait;
+                    resetGame();
                     break;
                 }
                 case inStartMenu: {
@@ -179,10 +202,34 @@ public class Model implements IModel, Commons {
         }
     }
 
+    private void resetGame() {
+        win = false;
+        ballStart = false;
+        wall.resetBricks();
+        plank.setX(INIT_PLANK_X);
+        plank.setY(INIT_PLANK_Y);
+        plank.setDx(0);
+        notifyGameObserver(Operation.RESET, null);
+        countDestroyed = 0;
+    }
+
     private void doInGame() {
         updateBall();
         updatePlank();
         checkCollision();
+        checkEndGame();
+    }
+
+    private void checkEndGame() {
+        if (ball.getY() + ball.getHiegth() > BOARD_HEIGHT) {
+            win = false;
+            stateGame = State.endGame;
+
+        }
+        if (countDestroyed == countBrickHeigth * countBrickWidth) {
+            win = true;
+            stateGame = State.endGame;
+        }
     }
 
     private void checkCollision() {
@@ -213,6 +260,7 @@ public class Model implements IModel, Commons {
                         ball.setDirectionX(-1 * ball.getDirectionX());
                     }
                     notifyGameObserver(Operation.WALL, i);
+                    ++countDestroyed;
                     bricks.get(i).setDestroyed(true);
                 }
             }
@@ -224,14 +272,15 @@ public class Model implements IModel, Commons {
 
             ball.setDirectionY(-1 * ball.getDirectionY());
 
-            if (plank.getDx() == -1) {
-                ball.setDirectionX(-1 * ball.getDirectionX());
-            } else {
-                ball.setDirectionX(Math.abs(ball.getDirectionX()));
+            if (plank.getDx() < 0) {
+                if (ball.getDirectionX() > 0)
+                    ball.setDirectionX(-1 * ball.getDirectionX());
+            } else if (plank.getDx() > 0) {
+                if (ball.getDirectionX() < 0)
+                    ball.setDirectionX(-1 * ball.getDirectionX());
             }
 
-        }
-        if (ball.getArea().intersects(plank.getArea()) && !plank.isInMove()) {
+        } else if (ball.getArea().intersects(plank.getArea()) && !plank.isInMove()) {
             ball.setDirectionY(-1 * ball.getDirectionY());
         }
     }
@@ -269,10 +318,6 @@ public class Model implements IModel, Commons {
             ball.setDirectionY(ball.getDirectionY() * (-1));
         }
 
-        if (ballY > BOARD_HEIGHT - BALL_HEIGTH) {
-            ball.setDirectionY(-1);
-        }
-
     }
 
 
@@ -281,7 +326,10 @@ public class Model implements IModel, Commons {
         BALL,
         WALL,
         PLANK,
-        START_MENU
+        START_MENU,
+        WIN,
+        LOSE,
+        RESET
     }
 }
 

@@ -29,6 +29,13 @@ public class GuiComponent extends JPanel {
         loadImage(imageName);
     }
 
+    public GuiComponent(LayoutManager layout, Image image,int width, int height) {
+        super(layout);
+        this.image = image;
+        this.width = width;
+        this.height = height;
+    }
+
     private void loadImage(String imageName) {
 
         try {
@@ -60,6 +67,13 @@ public class GuiComponent extends JPanel {
 
     public Image getImage() {
         return image;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        logger.log(Level.INFO,"Drawing");
+        g.drawImage(image,x,y,width,height,null);
     }
 
     public int getX() {

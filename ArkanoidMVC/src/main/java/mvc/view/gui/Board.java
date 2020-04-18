@@ -48,5 +48,10 @@ public class Board extends JPanel {
         Toolkit.getDefaultToolkit().sync();
     }
 
+    public void  resetBricks(){
+        for(GuiComponent brick:brickGUIS){
+            brick.setVisible(true);
+        }
+    }
 
 }

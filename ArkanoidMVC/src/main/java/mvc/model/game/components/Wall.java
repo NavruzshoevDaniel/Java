@@ -59,4 +59,10 @@ public class Wall {
     public int getBrickHeight() {
         return brickHeight;
     }
+
+    public void resetBricks(){
+        for (Brick brick: bricks){
+            brick.setDestroyed(false);
+        }
+    }
 }
