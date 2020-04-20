@@ -29,6 +29,15 @@ public class GuiComponent extends JPanel {
         loadImage(imageName);
     }
 
+    public GuiComponent(Image image) {
+        if (image==null){
+            throw new NullPointerException();
+        }
+        this.width=image.getWidth(null);
+        this.height=image.getHeight(null);
+        this.image=image;
+    }
+
     public GuiComponent(LayoutManager layout, Image image,int width, int height) {
         super(layout);
         this.image = image;

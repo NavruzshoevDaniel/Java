@@ -5,7 +5,8 @@ public interface Observer {
     void updateWall(int index);
     void updateBall();
     void updatePlank();
-    void updateStartMenu();
+    void initApplication();
+    void updateScore();
     void win();
     void lose();
     void reset();

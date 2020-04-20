@@ -7,18 +7,22 @@ import mvc.controller.Controller;
 import mvc.model.Model;
 import mvc.model.observers.Observer;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class View implements Observer {
     private static final Logger logger = Logger.getLogger(View.class.getName());
+    private static final int SIZE_SCORE=25;
+    private static final String SCORE_NAME="SCORE: ";
     private Model model;
     private Controller controller;
 
@@ -32,6 +36,7 @@ public class View implements Observer {
     private GuiComponent ballGUI;
     private GuiComponent plankGUI;
     private ArrayList<GuiComponent> brickGUIS;
+    private JLabel score;
     private EndGame endGame;
     private int endGameWidth = 550;
     private int endGameHiegth = 366;
@@ -53,7 +58,7 @@ public class View implements Observer {
     }
 
     private void setSwingSettings() {
-        logger.log(Level.INFO,"START SET SWINGS");
+        logger.log(Level.INFO, "START SET SWINGS");
         appFrame = new AppFrame();
         cardLayout = new CardLayout();
         manager = new JPanel(cardLayout);
@@ -67,37 +72,52 @@ public class View implements Observer {
         manager.add(startMenu, "start");
         appFrame.getContentPane().add(manager);
         appFrame.setVisible(true);
-        logger.log(Level.INFO,"MENU HAS JUST CREATED");
+        logger.log(Level.INFO, "MENU HAS JUST CREATED");
 
         ballGUI = new GuiComponent("/ball.png", model.getBALL_WIDTH(), model.getBALL_HEIGTH());
         plankGUI = new GuiComponent("/plank.png", model.getPLANK_WIDTH(), model.getPLANK_HEIGTH());
         brickGUIS = new ArrayList<>();
         backButton = new BackButton();
-        endGame = new EndGame(backButton,endGameWidth,endGameHiegth);
-        logger.log(Level.INFO,"ALL GUI COMPONENTS ALLOC");
+        score= new JLabel(SCORE_NAME+model.getCountDestroyed());
+        score.setFont(new Font("PT Serif",Font.BOLD,SIZE_SCORE));
+        endGame = new EndGame(backButton, endGameWidth, endGameHiegth);
+        logger.log(Level.INFO, "ALL GUI COMPONENTS ALLOC");
 
         initBricks();
         updateCoords();
+
         board = new Board(ballGUI, plankGUI, brickGUIS);
-        logger.log(Level.INFO,"BOARD INIT");
+
+
+        board.add(score,FlowLayout.LEFT);
+        logger.log(Level.INFO, "BOARD INIT");
 
         board.addKeyListener(new ViewKeyAdapter());
         board.addMouseListener(new ViewMouseAdapter());
 
-        backButton.addActionListener(e -> cardLayout.show(manager,"start"));
+        backButton.addActionListener(e -> cardLayout.show(manager, "start"));
 
         manager.add(board, "board");
         manager.add(endGame, "endGame");
 
-        logger.log(Level.INFO,"END SET SWINGS");
+        logger.log(Level.INFO, "END SET SWINGS");
     }
 
     private void initBricks() {
         int brickWidth = model.getWall().getBrickWidth();
         int brickHeight = model.getWall().getBrickHeight();
+        Image image = null;
+        try {
+            Image imageNatural = ImageIO.read(View.class.getResourceAsStream("/brick.png"));
+            ImageIcon imageIcon = new ImageIcon(imageNatural.getScaledInstance(brickWidth,
+                    brickHeight, Image.SCALE_DEFAULT));
+            image = imageIcon.getImage();
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Brick image doesn't exits", e);
+        }
 
         for (int i = 0; i < model.getWall().getCount(); i++) {
-            brickGUIS.add(i, new GuiComponent("/brick.png", brickWidth, brickHeight));
+            brickGUIS.add(i, new GuiComponent(image));
         }
 
     }
@@ -169,9 +189,14 @@ public class View implements Observer {
     }
 
     @Override
-    public void updateStartMenu() {
+    public void initApplication() {
         if (cardLayout != null)
             cardLayout.show(manager, "start");
+    }
+
+    @Override
+    public void updateScore() {
+        score.setText(SCORE_NAME+model.getCountDestroyed());
     }
 
     @Override
@@ -189,6 +214,7 @@ public class View implements Observer {
     @Override
     public void reset() {
         board.resetBricks();
+        score.setText(SCORE_NAME+model.getCountDestroyed());
     }
 
     public void enableGame() {

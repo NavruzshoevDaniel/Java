@@ -62,6 +62,10 @@ public class Model implements IModel, Commons {
         return ballStart;
     }
 
+    public int getCountDestroyed() {
+        return countDestroyed;
+    }
+
     public enum State {
         inStartMenu,
         inGame,
@@ -133,6 +137,7 @@ public class Model implements IModel, Commons {
                 }
                 case WALL: {
                     obser.updateWall((Integer) arg);
+                    obser.updateScore();
                     break;
                 }
                 case PLANK: {
@@ -140,7 +145,7 @@ public class Model implements IModel, Commons {
                     break;
                 }
                 case START_MENU: {
-                    obser.updateStartMenu();
+                    obser.initApplication();
                     break;
                 }
                 case WIN: {
@@ -209,8 +214,8 @@ public class Model implements IModel, Commons {
         plank.setX(INIT_PLANK_X);
         plank.setY(INIT_PLANK_Y);
         plank.setDx(0);
-        notifyGameObserver(Operation.RESET, null);
         countDestroyed = 0;
+        notifyGameObserver(Operation.RESET, null);
     }
 
     private void doInGame() {
@@ -221,7 +226,7 @@ public class Model implements IModel, Commons {
     }
 
     private void checkEndGame() {
-        if (ball.getY() + ball.getHiegth() > BOARD_HEIGHT) {
+        if (ball.getY() + ball.getHiegth() > BOARD_HEIGHT-plank.getHiegth()/2) {
             win = false;
             stateGame = State.endGame;
 
@@ -259,8 +264,8 @@ public class Model implements IModel, Commons {
                             || bricks.get(i).getArea().contains(pointLeft)) {
                         ball.setDirectionX(-1 * ball.getDirectionX());
                     }
-                    notifyGameObserver(Operation.WALL, i);
                     ++countDestroyed;
+                    notifyGameObserver(Operation.WALL, i);
                     bricks.get(i).setDestroyed(true);
                 }
             }
