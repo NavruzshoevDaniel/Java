@@ -2,6 +2,7 @@ package ru.nsu.ccfit.navruzshoev.threadpool;
 
 import ru.nsu.ccfit.navruzshoev.factory.storages.Storage;
 import ru.nsu.ccfit.navruzshoev.factory.details.Auto;
+import ru.nsu.ccfit.navruzshoev.factory.storages.StorageObservable;
 
 import java.util.Date;
 import java.util.logging.Level;
@@ -13,7 +14,7 @@ public class Dealer implements Runnable {
     private Storage<Auto> storageAuto;
     private int delay;
 
-    public Dealer(Storage<Auto> storageAuto, int delay) {
+    public Dealer(StorageObservable<Auto> storageAuto, int delay) {
         this.storageAuto = storageAuto;
         this.delay = delay;
     }
@@ -27,7 +28,7 @@ public class Dealer implements Runnable {
                 Auto auto=storageAuto.get();
 
                 if(logging){
-                    logger.log(Level.INFO,new Date()+" : "+Thread.currentThread().getName()+"get: Auto #"+
+                    logger.log(Level.INFO,new Date()+" : "+Thread.currentThread().getName()+" get: Auto #"+
                             auto.getID()+" (Body:"+auto.getBodyDetail().getID()+", Motor:"+auto.getEngineDetail().getID()+
                             ", Accessory:"+auto.getAccessoryDetail().getID()+")");
                 }

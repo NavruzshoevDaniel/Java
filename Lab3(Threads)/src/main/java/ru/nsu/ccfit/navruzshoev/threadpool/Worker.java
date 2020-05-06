@@ -34,7 +34,7 @@ public class Worker implements Runnable {
             autoStorage.add(auto);
             logger.log(Level.INFO, Thread.currentThread().getName() + " has just finished creating the car");
         } catch (InterruptedException e) {
-            logger.log(Level.INFO, Thread.currentThread().getName() + " has just interrupted");
+            logger.log(Level.WARNING, Thread.currentThread().getName() + " has just interrupted");
         }
 
     }
