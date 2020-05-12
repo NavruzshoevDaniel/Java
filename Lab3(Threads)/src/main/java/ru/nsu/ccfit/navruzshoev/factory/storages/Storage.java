@@ -64,4 +64,12 @@ public class Storage<T extends Detail> {
         }
 
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getSize(){
+       return details.size();
+    }
 }

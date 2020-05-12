@@ -7,110 +7,115 @@ import ru.nsu.ccfit.navruzshoev.factory.storages.StorageObservable;
 import ru.nsu.ccfit.navruzshoev.threadpool.Dealer;
 import ru.nsu.ccfit.navruzshoev.threadpool.Producer;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Factory {
     private static Logger logger = Logger.getLogger(Factory.class.getName());
-    private ThreadPoolExecutor poolDealers;
+    private Thread[] threadsDealers;
     private ThreadPoolExecutor poolWorkers;
-    private ThreadPoolExecutor poolSuppliers;
-    private ExecutorService threadEngine;
-    private ExecutorService threadBody;
-    private int storageBodySize;
-    private int storageMotorSize;
-    private int storageAccessorySize;
-    private int storageAutoSize;
-    private int accessorySuppliers;
-    private int workers;
-    private int dealers;
-    private boolean logSale;
-    private int bodyDelay;
-    private int accessoryDelay;
-    private int engineDelay;
-    private int dealersDelay;
+    private Thread[] threadsSuppliers;
+    private Thread threadEngine;
+    private Thread threadBody;
+    private StorageObservable<Auto> storageObservable;
+    private Storage<BodyDetail> bodyDetailStorage;
+    private Storage<AccessoryDetail> accessoryDetailStorage;
+    private Storage<EngineDetail> engineDetailStorage;
+    private FactoryInfo info;
 
 
-    public Factory() throws IOException {
+    public Factory(FactoryInfo info) {
+        this.info = info;
         init();
     }
 
-    private void init() throws IOException {
-        InputStream inputStream;
-        inputStream = getClass().getResourceAsStream("/settings.properties");
-        Properties properties = new Properties();
+    private void init() {
+        storageObservable = new StorageObservable<>(info.getStorageAutoSize(), Auto.class);
+        bodyDetailStorage = new Storage<>(info.getStorageBodySize(), BodyDetail.class);
+        accessoryDetailStorage = new Storage<>(info.getStorageAccessorySize(), AccessoryDetail.class);
+        engineDetailStorage = new Storage<>(info.getStorageMotorSize(), EngineDetail.class);
 
-        try {
-            properties.load(inputStream);
-            storageAccessorySize = Integer.parseInt(properties.getProperty("StorageAccessorySize"));
-            storageBodySize = Integer.parseInt(properties.getProperty("StorageBodySize"));
-            storageMotorSize = Integer.parseInt(properties.getProperty("StorageMotorSize"));
-            storageAutoSize = Integer.parseInt(properties.getProperty("StorageAutoSize"));
-            accessorySuppliers = Integer.parseInt(properties.getProperty("AccessorySuppliers"));
-            workers = Integer.parseInt(properties.getProperty("Workers"));
-            dealers = Integer.parseInt(properties.getProperty("Dealers"));
-            bodyDelay = Integer.parseInt(properties.getProperty("BodyDelay"));
-            accessoryDelay = Integer.parseInt(properties.getProperty("AccessoryDelay"));
-            engineDelay = Integer.parseInt(properties.getProperty("EngineDelay"));
-            dealersDelay = Integer.parseInt(properties.getProperty("DealersDelay"));
-            logSale = Boolean.parseBoolean(properties.getProperty("LogSale"));
+        threadsDealers = new Thread[info.getDealers()];
+        threadsSuppliers = new Thread[info.getAccessorySuppliers()];
 
-        } catch (NumberFormatException e) {
-            logger.log(Level.WARNING, "No such key", e);
-            throw e;
-        } catch (NullPointerException e) {
-            logger.log(Level.WARNING, "No such property file", e);
-            throw e;
-        } catch (IOException e) {
-            logger.log(Level.WARNING, "IOException", e);
-            throw e;
+        for (int i = 0; i < info.getDealers(); i++) {
+            threadsDealers[i] = new Thread(new Dealer(storageObservable, info.getDealersDelay()));
         }
-        poolDealers = (ThreadPoolExecutor) Executors.newFixedThreadPool(dealers);
-        poolSuppliers = (ThreadPoolExecutor) Executors.newFixedThreadPool(accessorySuppliers);
-        poolWorkers = (ThreadPoolExecutor) Executors.newFixedThreadPool(workers);
-        threadEngine = Executors.newSingleThreadExecutor();
-        threadBody = Executors.newSingleThreadExecutor();
+        for (int i = 0; i < info.getAccessorySuppliers(); i++) {
+            threadsSuppliers[i] = new Thread(new Producer<AccessoryDetail>(accessoryDetailStorage, AccessoryDetail.class,
+                    info.getAccessoryDelay()));
+        }
+
+        poolWorkers = (ThreadPoolExecutor) Executors.newFixedThreadPool(info.getCountWorkers());
+
+        threadEngine = new Thread(new Producer<EngineDetail>(engineDetailStorage, EngineDetail.class,
+                info.getEngineDelay()));
+        threadBody = new Thread(new Producer<BodyDetail>(bodyDetailStorage, BodyDetail.class, info.getBodyDelay()));
     }
 
     public void startWorking() {
 
-        StorageObservable<Auto> storageObservable = new StorageObservable<>(storageAutoSize, Auto.class);
-        Storage<BodyDetail> bodyDetailStorage = new Storage<>(storageBodySize, BodyDetail.class);
-        Storage<AccessoryDetail> accessoryDetailStorage = new Storage<>(storageAccessorySize, AccessoryDetail.class);
-        Storage<EngineDetail> engineDetailStorage = new Storage<>(storageMotorSize, EngineDetail.class);
-
         Controller controller = new Controller(poolWorkers, storageObservable, accessoryDetailStorage, engineDetailStorage,
                 bodyDetailStorage);
+
         storageObservable.registerObserver(controller);
 
 
-        threadEngine.execute(new Producer<EngineDetail>(engineDetailStorage, EngineDetail.class, engineDelay));
-        threadBody.execute(new Producer<BodyDetail>(bodyDetailStorage, BodyDetail.class, bodyDelay));
+        threadEngine.start();
+        threadBody.start();
 
-        for (int i = 0; i < accessorySuppliers; i++) {
-            poolSuppliers.execute(new Producer<AccessoryDetail>(accessoryDetailStorage, AccessoryDetail.class,
-                    accessoryDelay));
+        for (int i = 0; i < info.getAccessorySuppliers(); i++) {
+            threadsSuppliers[i].start();
         }
 
-        for (int i = 0; i < dealers; i++) {
-            poolDealers.execute(new Dealer(storageObservable, dealersDelay));
+        for (int i = 0; i < info.getDealers(); i++) {
+            threadsDealers[i].start();
         }
 
 
     }
 
     public void finishWorking() {
-        poolDealers.shutdownNow();
-        poolSuppliers.shutdownNow();
+        for (int i = 0; i < info.getDealers(); i++) {
+            threadsDealers[i].interrupt();
+        }
+        for (int i = 0; i < info.getAccessorySuppliers(); i++) {
+            threadsSuppliers[i].interrupt();
+        }
+
+        threadBody.interrupt();
+
+        threadEngine.interrupt();
+
+
+
         poolWorkers.shutdownNow();
-        threadBody.shutdownNow();
-        threadEngine.shutdownNow();
+
+        try {
+            joinThreads();
+        } catch (InterruptedException e) {
+            logger.log(Level.WARNING,"Threads interrupted while they were closing");
+        }
+
         logger.log(Level.INFO, "All threads have just interrupted");
+    }
+
+    private void joinThreads() throws InterruptedException {
+        for (int i = 0; i < info.getDealers(); i++) {
+            threadsDealers[i].join();
+        }
+        for (int i = 0; i < info.getAccessorySuppliers(); i++) {
+            threadsSuppliers[i].join();
+        }
+
+        threadBody.join();
+
+        threadEngine.join();
+
+        poolWorkers.awaitTermination(30, TimeUnit.SECONDS);
+
     }
 }

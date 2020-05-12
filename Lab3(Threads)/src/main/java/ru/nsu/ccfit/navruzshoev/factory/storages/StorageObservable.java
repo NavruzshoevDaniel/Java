@@ -30,7 +30,7 @@ public class StorageObservable<T extends Detail> extends Storage<T> implements O
     @Override
     public void notifyControllers() {
         for (IController controller : controllers) {
-            controller.createAuto();
+            controller.update();
         }
     }
 

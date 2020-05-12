@@ -1,9 +1,11 @@
 package ru.nsu.ccfit.navruzshoev;
 
 import ru.nsu.ccfit.navruzshoev.factory.Factory;
+import ru.nsu.ccfit.navruzshoev.factory.FactoryInfo;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -21,22 +23,35 @@ public class Main {
             e.printStackTrace();
         }
 
-        Factory factory=null;
+
+        InputStream inputStream;
+        inputStream = Main.class.getResourceAsStream("/settings.properties");
+        Properties properties = new Properties();
 
         try {
-            factory = new Factory();
-            logger.log(Level.INFO, "The factory has just created successfully");
+            properties.load(inputStream);
         } catch (IOException e) {
-            logger.log(Level.WARNING, "The factory couldn't create");
+            e.printStackTrace();
         }
 
-        if (factory!=null){
+        FactoryInfo info = null;
+        try {
+            info = new FactoryInfo(properties);
+            logger.log(Level.INFO, "The factory info has just created successfully");
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "The factory info couldn't create");
+        }
+
+        Factory factory = new Factory(info);
+
+
+        if (factory != null) {
             factory.startWorking();
         }
+
         Scanner in = new Scanner(System.in);
         while (true) {
-
-            if(in.nextLine().equals("exit")){
+            if (in.nextLine().equals("exit")) {
                 break;
             }
 
@@ -45,6 +60,6 @@ public class Main {
         if (factory != null) {
             factory.finishWorking();
         }
-        logger.log(Level.INFO,"Factory has just finished working");
+        logger.log(Level.INFO, "Factory has just finished working");
     }
 }
