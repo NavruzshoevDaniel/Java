@@ -1,0 +1,94 @@
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class TcpServer implements Runnable {
+    private static Logger logger = Logger.getLogger(TcpServer.class.getName());
+
+    private List<RequestProcessor> clients = Collections.synchronizedList(new LinkedList<>());
+    private final int port;
+    private ServerSocket serverSocket;
+
+    public TcpServer(int port) {
+        this.port = port;
+    }
+
+    public TcpServer() {
+        this.port = 0;
+    }
+
+    public void close() {
+        if (serverSocket != null) {
+            try {
+                serverSocket.close();
+            } catch (IOException e) {
+                logger.log(Level.WARNING, "Couldn't close server socket");
+            }
+        }
+
+        for (RequestProcessor client : clients) {
+            try {
+                client.close();
+            } catch (IOException e) {
+                logger.log(Level.WARNING, "Couldn't close " + client.getName() + "'s socket");
+            }
+        }
+    }
+
+    public void addClient(RequestProcessor newClient) {
+        if (newClient != null) {
+            clients.add(newClient);
+        }
+    }
+
+    public void removeClient(RequestProcessor client) {
+        if (client != null) {
+            clients.remove(client);
+            logger.log(Level.INFO, client.getName() + "has just removed");
+        }
+    }
+
+    public void sendMessageAllClients(Message message) {
+        for (RequestProcessor client : clients) {
+            try {
+                client.sendMessage(message);
+            } catch (IOException e) {
+                removeClient(client);
+                logger.log(Level.WARNING, client.getName() + " has just couldn't send the message");
+            }
+        }
+    }
+
+    @Override
+    public void run() {
+        try {
+            serverSocket = new ServerSocket(port);
+            while (true) {
+                Socket socket = serverSocket.accept();
+                logger.log(Level.INFO, "Connection has received from " + socket.getInetAddress() +
+                        ":" + socket.getPort());
+                RequestProcessor newRequest = new RequestProcessor(socket, this);
+                Thread client = new Thread(newRequest);
+                client.start();
+                logger.log(Level.INFO, "Start RequestProcessor");
+            }
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Server couldn't create socket");
+        } finally {
+            if (serverSocket != null) {
+                try {
+                    serverSocket.close();
+                } catch (IOException e) {
+                    logger.log(Level.WARNING, "", e);
+                }
+            }
+        }
+    }
+}
