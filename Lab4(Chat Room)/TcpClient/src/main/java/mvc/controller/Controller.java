@@ -1,15 +1,19 @@
 package mvc.controller;
 
-import mvc.model.Model;
+import mvc.model.TcpClient;
 import mvc.view.View;
 
 public class Controller {
-    private Model model;
+    private TcpClient model;
     private View view;
 
-    public Controller(Model model) {
+    public Controller(TcpClient model) {
         this.model = model;
-        this.view = new View(model,this);
+        this.view = new View(this.model,this);
         this.view.createView();
+    }
+
+    void sendMessage(String name){
+        model.login(name);
     }
 }

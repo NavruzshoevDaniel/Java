@@ -1,6 +1,7 @@
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +26,7 @@ public class RequestProcessor implements Runnable {
     public void sendMessage(Message message) throws IOException {
         if (objectOutputStream != null) {
             objectOutputStream.writeObject(message);
+            objectOutputStream.flush();
         }
     }
 
@@ -42,12 +44,12 @@ public class RequestProcessor implements Runnable {
                 Message message = (Message) objectInputStream.readObject();
                 logger.log(Level.INFO, Thread.currentThread().getName() + " received: type=" + message.getType() +
                         " text=" + message.getText());
-
+                clientsResponse(message);
                 objectOutputStream.flush();
             }
 
         } catch (IOException e) {
-            logger.log(Level.WARNING, "Socket Stream error", e);
+            logger.log(Level.WARNING, "Sockets:", e);
 
         } catch (ClassNotFoundException e) {
             logger.log(Level.WARNING, "Read object error", e);
@@ -61,19 +63,52 @@ public class RequestProcessor implements Runnable {
                     objectInputStream.close();
                 }
             } catch (IOException ex) {
-                logger.log(Level.WARNING, "Object Streams close error", ex);
+                logger.log(Level.WARNING, "Object Streams has just closed error", ex);
             }
             logger.log(Level.INFO, Thread.currentThread() + " has just ended work");
         }
     }
 
-    void login(String name) {
-        this.name = name;
-        tcpServer.addClient(this);
-    }
-
     public String getName() {
         return name;
+    }
+
+    private void clientsResponse(Message message) throws IOException {
+        switch (message.getType()) {
+            case LOGIN: {
+                if (!tcpServer.addClient(this, message.getText())) {
+                    Message badName = new Message(MessageType.ERROR_NAME, "This name has already used by someone. " +
+                            "Try to choose another name:");
+                    sendMessage(badName);
+                } else {
+                    Message goodName = new Message(MessageType.SUCCESS_LOGIN, "Welcome to the chat room!!\n");
+                    sendMessage(goodName);
+                    this.name = message.getText();
+                }
+                break;
+            }
+            case GET_USERS: {
+                Message users = new Message(MessageType.GET_USERS, tcpServer.getUsers());
+                sendMessage(users);
+                logger.log(Level.INFO, "Server has just sent all users to " + name);
+                break;
+            }
+            case EXIT: {
+                tcpServer.removeClient(this);
+                logger.log(Level.INFO, name + " has just left the chat room");
+                break;
+            }
+            case TEXT_REQUEST: {
+
+                message.setType(MessageType.TEXT_RESPONSE);
+                message.setDate(new Date());
+                message.setText(name + " [" + message.getDate().toString() + "]" + ":" + message.getText());
+                tcpServer.sendMessageAllClients(message);
+                logger.log(Level.INFO, Thread.currentThread().getName() + " has just sent the message to " +
+                        name);
+                break;
+            }
+        }
     }
 
 

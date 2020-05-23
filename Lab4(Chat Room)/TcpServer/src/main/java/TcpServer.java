@@ -42,10 +42,18 @@ public class TcpServer implements Runnable {
         }
     }
 
-    public void addClient(RequestProcessor newClient) {
+    public boolean addClient(RequestProcessor newClient,String name) {
         if (newClient != null) {
+            for (RequestProcessor requestProcessor:clients){
+                if(requestProcessor.getName().equals(name)){
+                    return false;
+                }
+            }
             clients.add(newClient);
+            return true;
         }
+        logger.log(Level.WARNING,"Null pointer Client");
+        throw new NullPointerException();
     }
 
     public void removeClient(RequestProcessor client) {
@@ -64,6 +72,17 @@ public class TcpServer implements Runnable {
                 logger.log(Level.WARNING, client.getName() + " has just couldn't send the message");
             }
         }
+    }
+
+    public String getUsers() {
+        StringBuilder stringBuilder = new StringBuilder();
+        int count=0;
+
+        for (RequestProcessor client : clients) {
+            count++;
+            stringBuilder.append("№"+count+":"+client.getName()+"\n");
+        }
+        return stringBuilder.toString();
     }
 
     @Override

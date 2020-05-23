@@ -11,7 +11,6 @@ public class Message implements Serializable {
     public Message(MessageType type, String text) {
         this.type = type;
         this.text = text;
-        this.date = new Date();
     }
 
     public MessageType getType() {
@@ -32,5 +31,9 @@ public class Message implements Serializable {
 
     public Date getDate() {
         return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

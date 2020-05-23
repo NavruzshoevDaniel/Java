@@ -1,12 +1,14 @@
 package mvc.view;
 
 import mvc.controller.Controller;
-import mvc.model.Model;
 import mvc.model.Observer;
+import mvc.model.TcpClient;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,17 +17,17 @@ public class View implements Observer {
     private final int FRAME_WIDTH = 400;
     private final int FRAME_HIGTH = 300;
 
-    private Model model;
+    private TcpClient model;
     private Controller controller;
 
     private JFrame appFrame;
     private JTextArea messages;
-    private JTextArea textArea;
+    private JTextArea textToSend;
     private JButton sendButton;
     private String title = "Client";
 
 
-    public View(Model model, Controller controller) {
+    public View(TcpClient model, Controller controller) {
         this.model = model;
         this.controller = controller;
         model.registerObserver(this);
@@ -42,9 +44,9 @@ public class View implements Observer {
         messages.setEditable(false);
         messages.setLineWrap(true);
 
-        textArea = new JTextArea(title);
-        textArea.setLineWrap(true);
-        textArea.setEditable(true);
+        textToSend = new JTextArea(title);
+        textToSend.setLineWrap(true);
+        textToSend.setEditable(true);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
         JScrollPane jScrollPane = new JScrollPane(messages, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -54,8 +56,18 @@ public class View implements Observer {
 
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(textArea, BorderLayout.CENTER);
+        bottomPanel.add(textToSend, BorderLayout.CENTER);
         sendButton = new JButton("Отправить");
+        sendButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String textMessage=textToSend.getText();
+                if(textMessage!=null){
+                    //send
+                }
+                textToSend.setText("");
+            }
+        });
         bottomPanel.add(sendButton, BorderLayout.EAST);
         bottomPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
