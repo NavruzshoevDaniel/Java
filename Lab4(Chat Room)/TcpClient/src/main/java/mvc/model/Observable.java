@@ -1,6 +1,8 @@
 package mvc.model;
 
+import messages.Message;
+
 public interface Observable {
     void registerObserver(Observer observer);
-    void updateObservers();
+    void updateObservers(OutputType type, String text);
 }

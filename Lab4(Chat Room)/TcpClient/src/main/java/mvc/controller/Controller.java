@@ -1,5 +1,6 @@
 package mvc.controller;
 
+import messages.MessageType;
 import mvc.model.TcpClient;
 import mvc.view.View;
 
@@ -9,11 +10,12 @@ public class Controller {
 
     public Controller(TcpClient model) {
         this.model = model;
-        this.view = new View(this.model,this);
+        this.view = new View(this.model, this);
         this.view.createView();
     }
 
-    void sendMessage(String name){
-        model.login(name);
+    public void sendMessage(String name) {
+        MessageType type=model.parseText(name);
+        model.sendMessage(type,name);
     }
 }

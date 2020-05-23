@@ -1,4 +1,7 @@
 
+import messages.Message;
+import messages.MessageType;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -42,24 +45,28 @@ public class TcpServer implements Runnable {
         }
     }
 
-    public boolean addClient(RequestProcessor newClient,String name) {
+    public boolean addClient(RequestProcessor newClient, String name) {
         if (newClient != null) {
-            for (RequestProcessor requestProcessor:clients){
-                if(requestProcessor.getName().equals(name)){
+            for (RequestProcessor requestProcessor : clients) {
+                if (requestProcessor.getName().equals(name)) {
                     return false;
                 }
             }
             clients.add(newClient);
+            sendMessageAllClients(new Message(MessageType.TEXT_RESPONSE_SYSTEM, name +
+                    " has joined the chat\n"));
             return true;
         }
-        logger.log(Level.WARNING,"Null pointer Client");
+        logger.log(Level.WARNING, "Null pointer Client");
         throw new NullPointerException();
     }
 
     public void removeClient(RequestProcessor client) {
         if (client != null) {
             clients.remove(client);
-            logger.log(Level.INFO, client.getName() + "has just removed");
+            sendMessageAllClients(new Message(MessageType.TEXT_RESPONSE_SYSTEM, client.getName() +
+                    " has just left the chat\n"));
+            logger.log(Level.INFO, client.getName() + " has just removed");
         }
     }
 
@@ -76,11 +83,11 @@ public class TcpServer implements Runnable {
 
     public String getUsers() {
         StringBuilder stringBuilder = new StringBuilder();
-        int count=0;
+        int count = 0;
 
         for (RequestProcessor client : clients) {
             count++;
-            stringBuilder.append("№"+count+":"+client.getName()+"\n");
+            stringBuilder.append("№" + count + ":" + client.getName() + "\n");
         }
         return stringBuilder.toString();
     }

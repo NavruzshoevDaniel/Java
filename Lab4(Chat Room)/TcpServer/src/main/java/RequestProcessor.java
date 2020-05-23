@@ -1,4 +1,7 @@
 
+import messages.Message;
+import messages.MessageType;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Date;
@@ -13,6 +16,7 @@ public class RequestProcessor implements Runnable {
     private String name;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
+    private boolean exit = false;
 
     public RequestProcessor(Socket socket, TcpServer tcpServer) {
         this.socket = socket;
@@ -39,22 +43,23 @@ public class RequestProcessor implements Runnable {
             objectInputStream = new ObjectInputStream(input);
             objectOutputStream = new ObjectOutputStream(output);
 
-            while (true) {
+            while (!exit) {
                 logger.log(Level.INFO, Thread.currentThread().getName() + " is waiting message...");
                 Message message = (Message) objectInputStream.readObject();
+
                 logger.log(Level.INFO, Thread.currentThread().getName() + " received: type=" + message.getType() +
                         " text=" + message.getText());
                 clientsResponse(message);
-                objectOutputStream.flush();
             }
 
         } catch (IOException e) {
-            logger.log(Level.WARNING, "Sockets:", e);
+            logger.log(Level.WARNING, "Sockets(Maybe client has just closed the app):", e);
 
         } catch (ClassNotFoundException e) {
             logger.log(Level.WARNING, "Read object error", e);
         } finally {
-            tcpServer.removeClient(this);
+            if (!exit)
+                tcpServer.removeClient(this);
             try {
                 if (objectOutputStream != null) {
                     objectOutputStream.close();
@@ -81,9 +86,11 @@ public class RequestProcessor implements Runnable {
                             "Try to choose another name:");
                     sendMessage(badName);
                 } else {
-                    Message goodName = new Message(MessageType.SUCCESS_LOGIN, "Welcome to the chat room!!\n");
-                    sendMessage(goodName);
                     this.name = message.getText();
+                    Message goodName = new Message(MessageType.SUCCESS_LOGIN, "Welcome to the chat room," +
+                            name + "!\n");
+                    sendMessage(goodName);
+
                 }
                 break;
             }
@@ -94,7 +101,10 @@ public class RequestProcessor implements Runnable {
                 break;
             }
             case EXIT: {
+                Message exitMessage = new Message(MessageType.GET_USERS, "You've just left the chat room.\n");
+                sendMessage(exitMessage);
                 tcpServer.removeClient(this);
+                exit = true;
                 logger.log(Level.INFO, name + " has just left the chat room");
                 break;
             }

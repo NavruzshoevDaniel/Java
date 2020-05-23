@@ -1,11 +1,18 @@
 package mvc.view;
 
+import messages.Message;
 import mvc.controller.Controller;
 import mvc.model.Observer;
+import mvc.model.OutputType;
 import mvc.model.TcpClient;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +28,7 @@ public class View implements Observer {
     private Controller controller;
 
     private JFrame appFrame;
-    private JTextArea messages;
+    private JTextPane messages;
     private JTextArea textToSend;
     private JButton sendButton;
     private String title = "Client";
@@ -40,11 +47,11 @@ public class View implements Observer {
         appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         appFrame.setLocationRelativeTo(null);
 
-        messages = new JTextArea("Добро поджаловать!\nВведите свое имя:\n");
+        messages = new JTextPane();
+        messages.setText("Enter your name:\n");
         messages.setEditable(false);
-        messages.setLineWrap(true);
 
-        textToSend = new JTextArea(title);
+        textToSend = new JTextArea();
         textToSend.setLineWrap(true);
         textToSend.setEditable(true);
 
@@ -57,13 +64,13 @@ public class View implements Observer {
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.add(textToSend, BorderLayout.CENTER);
-        sendButton = new JButton("Отправить");
+        sendButton = new JButton("Send");
         sendButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String textMessage=textToSend.getText();
-                if(textMessage!=null){
-                    //send
+                String textMessage = textToSend.getText();
+                if (textMessage != null) {
+                    controller.sendMessage(textMessage);
                 }
                 textToSend.setText("");
             }
@@ -88,7 +95,27 @@ public class View implements Observer {
     }
 
     @Override
-    public void updateView() {
-
+    public void updateView(OutputType type, String text) {
+        StyledDocument doc= messages.getStyledDocument();
+        Style style= messages.addStyle("",null);
+        switch (type) {
+            case ERROR:{
+                StyleConstants.setForeground(style,Color.RED);
+                break;
+            }
+            case SHARED:{
+                StyleConstants.setForeground(style,Color.BLACK);
+                break;
+            }
+            case SYSTEM:{
+                StyleConstants.setForeground(style,Color.BLUE);
+                break;
+            }
+        }
+        try {
+            doc.insertString(doc.getLength(),text+"\n",style);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
     }
 }

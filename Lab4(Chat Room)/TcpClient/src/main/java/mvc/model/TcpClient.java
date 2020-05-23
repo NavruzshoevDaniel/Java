@@ -1,10 +1,13 @@
 package mvc.model;
 
 
+import messages.Message;
+import messages.MessageType;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,14 +18,41 @@ public class TcpClient implements Runnable, Observable {
     private String ip;
     private final int port;
     private Socket socket;
+    private Properties property;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
-    private String name;
+    private boolean isLogin = false;
+    private boolean exit=false;
 
     public TcpClient(String ip, int port) throws IOException {
         this.ip = ip;
         this.port = port;
         socket = new Socket(ip, port);
+        initCommands();
+    }
+
+    private void initCommands() {
+        InputStream fis = null;
+        try {
+            fis = getClass().getClassLoader().getResourceAsStream("resources/commands.properties");
+            if (fis == null)
+                throw new IOException("Config file wasn't opened");
+            logger.log(Level.FINE, "InputStream was created");
+            property = new Properties();
+            property.load(fis);
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Config file wasn't opened");
+        } finally {
+            try {
+                if (fis != null) {
+                    fis.close();
+                    logger.log(Level.FINE, "InputStream was closed successfully ");
+                }
+
+            } catch (IOException ex) {
+                logger.log(Level.WARNING, "The program couldn't close InputStream");
+            }
+        }
     }
 
     public void close() throws IOException {
@@ -34,22 +64,35 @@ public class TcpClient implements Runnable, Observable {
     @Override
     public void run() {
         try {
-            socket = new Socket(ip, port);
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-            while (true) {
-                objectOutputStream.flush();
+            while (!exit) {
+                Message newMessage = (Message) objectInputStream.readObject();
+                if (newMessage.getType() == MessageType.SUCCESS_LOGIN) {
+                    isLogin = true;
+                }
+                updateObservers(whichOutType(newMessage), newMessage.getText());
+                if(newMessage.getType()==MessageType.EXIT){
+                    isLogin=false;
+                    exit=true;
+                }
             }
+
+            close();
+            objectInputStream.close();
+            objectOutputStream.close();
+            logger.log(Level.INFO,"You have just finished chat");
 
         } catch (IOException e) {
             logger.log(Level.WARNING, "Socket error", e);
+        } catch (ClassNotFoundException e) {
+            logger.log(Level.WARNING, "Object Input Stream error", e);
         }
+
+
     }
 
-    public void login(String name) {
-        this.name = name;
-    }
 
     @Override
     public void registerObserver(Observer observer) {
@@ -63,18 +106,53 @@ public class TcpClient implements Runnable, Observable {
     }
 
     @Override
-    public void updateObservers() {
+    public void updateObservers(OutputType type, String text) {
         for (Observer observer : observers) {
-            observer.updateView();
+            observer.updateView(type, text);
         }
     }
 
-    public void sendMessage(MessageType messageType,String text) {
+    public void sendMessage(Message message) {
         try {
-            objectOutputStream.writeObject(text);
+            objectOutputStream.writeObject(message);
         } catch (IOException e) {
             logger.log(Level.WARNING, Thread.currentThread().getName() + " can't send text");
         }
     }
+
+    public void sendMessage(MessageType type, String text) {
+        sendMessage(new Message(type, text));
+    }
+
+    private OutputType whichOutType(Message message) {
+        MessageType type = message.getType();
+        switch (type) {
+            case ERROR_NAME:
+                return OutputType.ERROR;
+
+            case TEXT_RESPONSE:
+                return OutputType.SHARED;
+
+            default:
+                return OutputType.SYSTEM;
+        }
+    }
+
+
+    public MessageType parseText(String string) {
+        if (!isLogin) {
+            return MessageType.LOGIN;
+        }
+
+        try {
+            MessageType type = MessageType.valueOf(property.getProperty(string));
+            return type;
+        } catch (Exception e) {
+            return MessageType.TEXT_REQUEST;
+        }
+
+
+    }
+
 
 }

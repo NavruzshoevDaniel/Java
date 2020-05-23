@@ -1,5 +1,7 @@
 package mvc.model;
 
+import messages.Message;
+
 public interface Observer {
-    void updateView();
+    void updateView(OutputType type, String text);
 }

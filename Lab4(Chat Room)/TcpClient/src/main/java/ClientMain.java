@@ -16,7 +16,7 @@ public class ClientMain {
 
         logManager.readConfiguration(ClientMain.class.getResourceAsStream("/logging.properties"));
 
-        TcpClient tcpClient =new TcpClient("127.0.0.1",0);
+        TcpClient tcpClient =new TcpClient("127.0.0.1",2048);
         Controller controller= new Controller(tcpClient);
         Thread thread= new Thread(tcpClient);
         thread.start();
