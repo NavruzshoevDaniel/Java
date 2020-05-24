@@ -22,10 +22,10 @@ public class TcpClient implements Runnable, Observable {
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
     private boolean isLogin = false;
-    private boolean exit=false;
-    private boolean connect=false;
+    private boolean exit = false;
+    private boolean connect = false;
 
-    public TcpClient(String ip, int port){
+    public TcpClient(String ip, int port) {
         this.ip = ip;
         this.port = port;
         initCommands();
@@ -64,11 +64,10 @@ public class TcpClient implements Runnable, Observable {
     @Override
     public void run() {
         try {
-            socket= new Socket(ip,port);
+            socket = new Socket(ip, port);
         } catch (IOException e) {
-            logger.log(Level.WARNING,"Server isn't working");
-            updateObservers(OutputType.ERROR,"Server isn't working now.\nTry again later");
-
+            logger.log(Level.WARNING, "Server isn't working");
+            updateObservers(OutputType.ERROR, "Server isn't working now.\nTry again later");
         }
         try {
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -80,24 +79,36 @@ public class TcpClient implements Runnable, Observable {
                     isLogin = true;
                 }
                 updateObservers(whichOutType(newMessage), newMessage.getText());
-                if(newMessage.getType()==MessageType.EXIT){
-                    isLogin=false;
-                    exit=true;
+                if (newMessage.getType() == MessageType.EXIT) {
+                    isLogin = false;
+                    exit = true;
                 }
             }
 
-            close();
             objectInputStream.close();
             objectOutputStream.close();
-            logger.log(Level.INFO,"You have just finished chat");
+            logger.log(Level.INFO, "You have just finished chat");
 
         } catch (IOException e) {
             logger.log(Level.WARNING, "Socket error", e);
-            updateObservers(OutputType.ERROR,"Sorry, but something has just happened on the server.\n" +
+            updateObservers(OutputType.ERROR, "Sorry, but something has just happened on the server.\n" +
                     "Try again later");
-            connect=false;
+            connect = false;
+
         } catch (ClassNotFoundException e) {
             logger.log(Level.WARNING, "Object Input Stream error", e);
+        } finally {
+            try {
+                if (objectOutputStream != null) {
+                    objectOutputStream.close();
+                }
+                if (objectInputStream != null) {
+                    objectInputStream.close();
+                }
+                close();
+            } catch (IOException e) {
+                logger.log(Level.WARNING, "", e);
+            }
         }
 
 
