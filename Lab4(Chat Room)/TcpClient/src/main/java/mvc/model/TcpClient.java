@@ -98,14 +98,20 @@ public class TcpClient implements Runnable, Observable {
         } catch (ClassNotFoundException e) {
             logger.log(Level.WARNING, "Object Input Stream error", e);
         } finally {
+
             try {
                 if (objectOutputStream != null) {
                     objectOutputStream.close();
                 }
+
                 if (objectInputStream != null) {
                     objectInputStream.close();
                 }
-                close();
+
+                if (socket != null) {
+                    close();
+                }
+
             } catch (IOException e) {
                 logger.log(Level.WARNING, "", e);
             }
