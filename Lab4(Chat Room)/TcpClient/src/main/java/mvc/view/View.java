@@ -40,7 +40,7 @@ public class View implements Observer {
         model.registerObserver(this);
     }
 
-    void setSwingSettings() {
+    private synchronized void setSwingSettings() {
         appFrame = new JFrame();
         appFrame.setTitle(title);
         appFrame.setSize(FRAME_WIDTH, FRAME_HIGTH);
@@ -95,7 +95,7 @@ public class View implements Observer {
     }
 
     @Override
-    public void updateView(OutputType type, String text) {
+    public synchronized void updateView(OutputType type, String text) {
         StyledDocument doc= messages.getStyledDocument();
         Style style= messages.addStyle("",null);
         switch (type) {

@@ -23,11 +23,11 @@ public class TcpClient implements Runnable, Observable {
     private ObjectOutputStream objectOutputStream;
     private boolean isLogin = false;
     private boolean exit=false;
+    private boolean connect=false;
 
-    public TcpClient(String ip, int port) throws IOException {
+    public TcpClient(String ip, int port){
         this.ip = ip;
         this.port = port;
-        socket = new Socket(ip, port);
         initCommands();
     }
 
@@ -64,6 +64,13 @@ public class TcpClient implements Runnable, Observable {
     @Override
     public void run() {
         try {
+            socket= new Socket(ip,port);
+        } catch (IOException e) {
+            logger.log(Level.WARNING,"Server isn't working");
+            updateObservers(OutputType.ERROR,"Server isn't working now.\nTry again later");
+
+        }
+        try {
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
 
@@ -86,6 +93,9 @@ public class TcpClient implements Runnable, Observable {
 
         } catch (IOException e) {
             logger.log(Level.WARNING, "Socket error", e);
+            updateObservers(OutputType.ERROR,"Sorry, but something has just happened on the server.\n" +
+                    "Try again later");
+            connect=false;
         } catch (ClassNotFoundException e) {
             logger.log(Level.WARNING, "Object Input Stream error", e);
         }
