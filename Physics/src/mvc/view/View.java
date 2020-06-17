@@ -8,7 +8,6 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -108,19 +107,19 @@ public class View implements Observer {
             for (double x = -1 * model.getA() - 10; x < model.getA() + 10; x += 0.01) {
                 if (i % 2 == 0) {
                     if (x <= -model.getA() / 2) {
-                        xySeries.add(x, root.getC() * Math.exp(root.getK2() * x) - root.getE());
+                        xySeries.add(x, root.getC() * Math.exp(root.getK2() * x) - Math.abs(root.getE()));
                     } else if (x >= model.getA() / 2) {
-                        xySeries.add(x, root.getC() * Math.exp(-root.getK2() * x) - root.getE());
+                        xySeries.add(x, root.getC() * Math.exp(-root.getK2() * x) - Math.abs(root.getE()));
                     } else {
-                        xySeries.add(x, model.getB() * Math.cos(root.getK1() * x) - root.getE());
+                        xySeries.add(x, model.getB() * Math.cos(root.getK1() * x) - Math.abs(root.getE()));
                     }
                 } else {
                     if (x <= -model.getA() / 2) {
-                        xySeries.add(x, -root.getC() * Math.exp(root.getK2() * x) - root.getE());
+                        xySeries.add(x, -root.getC() * Math.exp(root.getK2() * x) - Math.abs(root.getE()));
                     } else if (x >= model.getA() / 2) {
-                        xySeries.add(x, root.getC() * Math.exp(-root.getK2() * x) - root.getE());
+                        xySeries.add(x, root.getC() * Math.exp(-root.getK2() * x) - Math.abs(root.getE()));
                     } else {
-                        xySeries.add(x, model.getB() * Math.sin(root.getK1() * x) - root.getE());
+                        xySeries.add(x, model.getB() * Math.sin(root.getK1() * x) - Math.abs(root.getE()));
                     }
                 }
             }
@@ -131,40 +130,6 @@ public class View implements Observer {
         return dataset;
     }
 
-
-    private XYSeriesCollection createData(ArrayList<Root> roots) {
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series = new XYSeries("Sine", true, true);
-
-        for (int i = 0; i < roots.size(); i++) {
-
-            XYSeries xySeries = new XYSeries(String.valueOf(i), true, true);
-            Root root = roots.get(i);
-            for (double x = -1 * model.getA() - 10; x < model.getA() + 10; x += 0.01) {
-                if (i % 2 == 0) {
-                    if (x <= -model.getA() / 2) {
-                        series.add(i, Math.exp( i));
-                    } else if (x >= model.getA() / 2) {
-                        series.add(i,  Math.exp(  i));
-                    } else {
-                        series.add(i, Math.cos(i) );
-                    }
-                } else {
-                    if (x <= -model.getA() / 2) {
-                        series.add(i, -root.getC() * Math.exp(root.getK2() * i) - root.getE());
-                    } else if (x >= model.getA() / 2) {
-                        series.add(i, root.getC() * Math.exp(-root.getK2() * i) - root.getE());
-                    } else {
-                        series.add(i, model.getB() * Math.sin(root.getK1() * i) - root.getE());
-                    }
-                }
-            }
-
-            dataset.addSeries(xySeries);
-        }
-
-        return dataset;
-    }
     @Override
     public void updateView(ArrayList<Root> roots) {
         EventQueue.invokeLater(new Runnable() {
@@ -175,7 +140,7 @@ public class View implements Observer {
                         createDataset(roots),
                         PlotOrientation.VERTICAL,
                         true, true, false);
-chartPanel.setChart(lineChart);
+                chartPanel.setChart(lineChart);
             }
         });
 
