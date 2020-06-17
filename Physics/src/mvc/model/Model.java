@@ -20,6 +20,7 @@ public class Model implements Observable {
     private double a = 15;
     private double b = 0.2;
     private ArrayList<Observer> observers = new ArrayList<>();
+    private boolean isUpdating = false;
 
     public Model() {
         init();
@@ -28,7 +29,7 @@ public class Model implements Observable {
     private void init() {
         double sizeBound = Math.abs(right - left) / SIZE_BOUNDS;
         for (int i = 0; i < SIZE_BOUNDS; ++i) {
-            bounds.add( i, left + i * sizeBound);
+            bounds.add(i, left + i * sizeBound);
         }
     }
 
@@ -51,12 +52,13 @@ public class Model implements Observable {
     }
 
     public void update(int a, double b) {
-
-        roots.clear();
-        setA(a);
-        setB(b);
-        searchRoots(a, b);
-        updateObservers();
+        if (!isUpdating) {
+            roots.clear();
+            setA(a);
+            setB(b);
+            searchRoots(a, b);
+            updateObservers();
+        }
     }
 
     private void searchRoots(int a, double b) {
@@ -86,8 +88,8 @@ public class Model implements Observable {
                     && root.getC() != Double.NEGATIVE_INFINITY) {
                 symm = !symm;
                 roots.add(root);
-                logger.log(Level.INFO,"New Root:E="+root.getE()+"\nk1="+root.getK1()
-                        +"\nk2="+root.getK2()+"\nC="+root.getC());
+                logger.log(Level.INFO, "New Root:E=" + root.getE() + "\nk1=" + root.getK1()
+                        + "\nk2=" + root.getK2() + "\nC=" + root.getC());
             }
 
         }

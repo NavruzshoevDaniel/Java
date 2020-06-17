@@ -12,6 +12,8 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,8 +31,6 @@ public class View implements Observer {
     private final int FRAME_HIGTH = 900;
 
     private JFrame appFrame;
-    private JTextPane info;
-    private JPanel graph;
     private JSlider sliderA;
     private JTextArea b;
     private JButton button;
@@ -49,11 +49,19 @@ public class View implements Observer {
         appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         appFrame.setLocationRelativeTo(null);
 
-        info = new JTextPane();
 
         sliderA = new JSlider(0, 70, 15);
         sliderA.setPaintLabels(true);
         sliderA.setMajorTickSpacing(10);
+        sliderA.setMinorTickSpacing(1);
+        sliderA.setPaintTicks(true);
+
+        sliderA.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                controller.update(sliderA.getValue(), b.getText());
+            }
+        });
 
         b = new JTextArea("0.2");
         b.setLineWrap(true);
@@ -78,11 +86,26 @@ public class View implements Observer {
 
         chartPanel = new ChartPanel(lineChart);
 
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.add(sliderA);
-        bottomPanel.add(b);
-        bottomPanel.add(button);
-        bottomPanel.setToolTipText("A=");
+        JPanel bottomPanel = new JPanel(new GridBagLayout());
+
+        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.weightx = 1;
+
+
+        sliderA.setPreferredSize(new Dimension(sliderA.getPreferredSize().width+300,
+                sliderA.getPreferredSize().height+10));
+        bottomPanel.add(sliderA, gridBagConstraints);
+        gridBagConstraints.gridwidth = 1;
+        gridBagConstraints.gridx = 2;
+
+        bottomPanel.add(b, gridBagConstraints);
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridx = 3;
+        bottomPanel.add(button, gridBagConstraints);
+        sliderA.setToolTipText("A=");
 
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
         mainPanel.add(chartPanel, BorderLayout.CENTER);
@@ -141,6 +164,7 @@ public class View implements Observer {
                         PlotOrientation.VERTICAL,
                         true, true, false);
                 chartPanel.setChart(lineChart);
+                Toolkit.getDefaultToolkit().sync();
             }
         });
 
