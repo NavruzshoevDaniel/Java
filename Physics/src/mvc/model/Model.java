@@ -1,6 +1,10 @@
 package mvc.model;
 
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,17 +12,14 @@ import java.util.logging.Logger;
 public class Model implements Observable {
     private final Logger logger = Logger.getLogger(Model.class.getName());
 
-    private final int SIZE_BOUNDS = 10000;
+    private Hashtable<String, Double> defineTable = new Hashtable<>();
+    private final int SIZE_BOUNDS = 5000;
     private ArrayList<Root> roots = new ArrayList<>();
-    private Vector<Double> bounds = new Vector<>();
-    private double right = 0;
-    private double left = -1;
-    private double e = 1e-15;
-    private double U = 1;
-    private double m = 1;
-    private double h = 1;
-    private double a = 15;
-    private double b = 0.2;
+    private final Vector<Double> bounds = new Vector<>();
+    private final double RIGHT = 0;
+    private final double LEFT = -1;
+    private final double e = 1e-15;
+
     private ArrayList<Observer> observers = new ArrayList<>();
     private boolean isUpdating = false;
 
@@ -27,9 +28,14 @@ public class Model implements Observable {
     }
 
     private void init() {
-        double sizeBound = Math.abs(right - left) / SIZE_BOUNDS;
+        defineTable.put("A", 15d);
+        defineTable.put("B", 0.2);
+        defineTable.put("U", 1d);
+        defineTable.put("M", 1d);
+        defineTable.put("H", 1d);
+        double sizeBound = Math.abs(RIGHT - LEFT) / SIZE_BOUNDS;
         for (int i = 0; i < SIZE_BOUNDS; ++i) {
-            bounds.add(i, left + i * sizeBound);
+            bounds.add(i, LEFT + i * sizeBound);
         }
     }
 
@@ -45,27 +51,67 @@ public class Model implements Observable {
     }
 
     @Override
-    public void updateObservers() {
+    public void updateObservers(XYSeriesCollection collection) {
         for (Observer observer : observers) {
-            observer.updateView(roots);
+            observer.updateView(collection);
         }
     }
 
-    public void update(int a, double b) {
+    public void update() {
         if (!isUpdating) {
             roots.clear();
-            setA(a);
-            setB(b);
-            searchRoots(a, b);
-            updateObservers();
+            searchRoots();
+            updateObservers(createPoints());
         }
     }
 
-    private void searchRoots(int a, double b) {
+    private XYSeriesCollection createPoints() {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        double a = defineTable.get("A");
+        double b = defineTable.get("B");
+
+        for (int i = 0; i < roots.size(); i++) {
+
+            XYSeries xySeries = new XYSeries(String.valueOf(i), true, true);
+            Root root = roots.get(i);
+            for (double x = -1 * a - 10; x < a + 10; x += 0.01) {
+                if (i % 2 == 0) {
+                    if (x <= -a / 2) {
+                        xySeries.add(x, root.getC() * Math.exp(root.getK2() * x) - Math.abs(root.getE()));
+                    } else if (x >= a / 2) {
+                        xySeries.add(x, root.getC() * Math.exp(-root.getK2() * x) - Math.abs(root.getE()));
+                    } else {
+                        xySeries.add(x, b * Math.cos(root.getK1() * x) - Math.abs(root.getE()));
+                    }
+                } else {
+                    if (x <= -a / 2) {
+                        xySeries.add(x, -root.getC() * Math.exp(root.getK2() * x) - Math.abs(root.getE()));
+                    } else if (x >= a / 2) {
+                        xySeries.add(x, root.getC() * Math.exp(-root.getK2() * x) - Math.abs(root.getE()));
+                    } else {
+                        xySeries.add(x, b * Math.sin(root.getK1() * x) - Math.abs(root.getE()));
+                    }
+                }
+            }
+
+            dataset.addSeries(xySeries);
+        }
+
+        return dataset;
+
+    }
+
+    private void searchRoots() {
         double left = 0;
         double right = 0;
         double mid = (left + right) / 2.0;
         boolean symm = true;
+
+        double a = defineTable.get("A");
+        double b = defineTable.get("B");
+        double U = defineTable.get("U");
+        double h = defineTable.get("H");
+        double m = defineTable.get("M");
 
         for (int i = 0; i < SIZE_BOUNDS - 1; ++i) {
             left = bounds.get(i);
@@ -74,9 +120,9 @@ public class Model implements Observable {
 
                 mid = (left + right) / 2.0;
 
-                if ((f(mid, symm) * f(left, symm)) < 0) {
+                if ((f(mid, m, a, h, U, symm) * f(left, m, a, h, U, symm)) < 0) {
                     right = mid;
-                } else if ((f(mid, symm) * f(right, symm)) < 0) {
+                } else if ((f(mid, m, a, h, U, symm) * f(right, m, a, h, U, symm)) < 0) {
                     left = mid;
                 } else {
                     mid = 0;
@@ -95,26 +141,14 @@ public class Model implements Observable {
         }
     }
 
-    private double f(double E, boolean symm) {
+    private double f(double E, double m, double a, double h, double U, boolean symm) {
         if (symm)
             return Math.tan(Math.sqrt(2 * m * (E + U)) * a / (2 * h)) - 1 / Math.sqrt((U / Math.abs(E)) - 1);
         else
             return -1 / Math.tan((Math.sqrt(2 * m * (E + U)) * a) / (2 * h)) - 1 / Math.sqrt((U / Math.abs(E)) - 1);
     }
 
-    public double getA() {
-        return a;
-    }
-
-    public double getB() {
-        return b;
-    }
-
-    public void setA(double a) {
-        this.a = a;
-    }
-
-    public void setB(double b) {
-        this.b = b;
+    public void putInDefineTable(String param, Double value) {
+        defineTable.put(param, value);
     }
 }

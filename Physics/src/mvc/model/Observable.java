@@ -1,6 +1,8 @@
 package mvc.model;
 
+import org.jfree.data.xy.XYSeriesCollection;
+
 public interface Observable {
     void registerObserver(Observer observer);
-    void updateObservers();
+    void updateObservers(XYSeriesCollection collection);
 }

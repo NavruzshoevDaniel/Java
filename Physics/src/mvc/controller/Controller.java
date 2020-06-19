@@ -3,7 +3,10 @@ package mvc.controller;
 import mvc.view.View;
 import mvc.model.Model;
 
+import java.util.logging.Logger;
+
 public class Controller {
+    private final Logger logger = Logger.getLogger(Controller.class.getName());
     private View view;
     private Model model;
 
@@ -14,15 +17,8 @@ public class Controller {
         view.createView();
     }
 
-    public void update(int value, String text) {
-
-        try {
-            double b=Double.parseDouble(text);
-            model.update(value,b);
-        }
-        catch (Exception ex){
-
-        }
-
+    public void update(String param,double value){
+        model.putInDefineTable(param,value);
+        model.update();
     }
 }

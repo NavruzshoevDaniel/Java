@@ -1,7 +1,7 @@
 package mvc.model;
 
-import java.util.ArrayList;
+import org.jfree.data.xy.XYSeriesCollection;
 
 public interface Observer {
-    void updateView(ArrayList<Root> roots);
+    void updateView(XYSeriesCollection collection);
 }
