@@ -37,7 +37,7 @@ public class StackCalculator {
             String line;
             String[] words;
             while ((line = bufferedReader.readLine()) != null && (!line.equals("END"))) {
-                if (line.charAt(0) != '#') {
+                if (line.length()!=0 && line.charAt(0) != '#') {
                     words = line.split(" ");
                     String[] args = new String[words.length - 1];
                     String commandName = words[0];

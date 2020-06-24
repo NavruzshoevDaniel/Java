@@ -1,6 +1,5 @@
 package stackcalculator;
 
-import com.sun.xml.internal.bind.v2.ClassFactory;
 import stackcalculator.commands.ICommand;
 
 import java.io.IOException;
@@ -44,7 +43,7 @@ public class Factory {
 
     public static Factory getInstance() throws IOException {
         if (instance == null) {
-            synchronized (ClassFactory.class) {
+            synchronized (Factory.class) {
                 if (instance == null){
                     instance = new Factory();
                 }

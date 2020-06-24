@@ -1,18 +1,30 @@
-мар 04, 2020 5:34:28 PM Main main
+июн 24, 2020 6:49:28 PM Main main
 FINE: Program selected File stream
-мар 04, 2020 5:34:28 PM stackcalculator.StackCalculator calculate
+июн 24, 2020 6:49:28 PM stackcalculator.StackCalculator calculate
 FINE: BufferedReader was created
-мар 04, 2020 5:34:35 PM stackcalculator.Factory <init>
-WARNING: Config file wasn't opened
-мар 04, 2020 5:35:12 PM stackcalculator.StackCalculator calculate
-WARNING: IOException:
-java.io.IOException: Config file wasn't opened
-	at stackcalculator.Factory.<init>(Factory.java:20)
-	at stackcalculator.Factory.getInstance(Factory.java:49)
-	at stackcalculator.StackCalculator.calculate(StackCalculator.java:45)
-	at Main.main(Main.java:31)
-
-мар 04, 2020 5:35:15 PM stackcalculator.StackCalculator calculate
+июн 24, 2020 6:49:28 PM stackcalculator.Factory <init>
+FINE: InputStream was created
+июн 24, 2020 6:49:28 PM stackcalculator.Factory <init>
+FINE: InputStream was closed successfully 
+июн 24, 2020 6:49:28 PM stackcalculator.Factory createCommand
+FINE: New Command(stackcalculator.commands.Push) was created
+июн 24, 2020 6:49:28 PM stackcalculator.StackCalculator commandExecuting
+FINE: The program started executing the command:stackcalculator.commands.Push
+июн 24, 2020 6:49:28 PM stackcalculator.commands.Push execute
+FINE: Successfully did operation stackcalculator.commands.Push
+июн 24, 2020 6:49:28 PM stackcalculator.Factory createCommand
+FINE: New Command(stackcalculator.commands.Push) was created
+июн 24, 2020 6:49:28 PM stackcalculator.StackCalculator commandExecuting
+FINE: The program started executing the command:stackcalculator.commands.Push
+июн 24, 2020 6:49:28 PM stackcalculator.commands.Push execute
+FINE: Successfully did operation stackcalculator.commands.Push
+июн 24, 2020 6:49:28 PM stackcalculator.Factory createCommand
+FINE: New Command(stackcalculator.commands.Print) was created
+июн 24, 2020 6:49:28 PM stackcalculator.StackCalculator commandExecuting
+FINE: The program started executing the command:stackcalculator.commands.Print
+июн 24, 2020 6:49:28 PM stackcalculator.commands.Print execute
+FINE: Successfully did operation stackcalculator.commands.Print
+июн 24, 2020 6:49:28 PM stackcalculator.StackCalculator calculate
 FINE: BufferedReader was closed
-мар 04, 2020 5:35:15 PM Main main
+июн 24, 2020 6:49:28 PM Main main
 FINE: Successful completion of the calculator
