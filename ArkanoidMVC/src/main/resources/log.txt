@@ -1,0 +1,326 @@
+июл. 14, 2020 6:59:08 PM mvc.model.Model registerObserver
+INFO: New observer subscribed: mvc.view.View@6d03e736
+июл. 14, 2020 6:59:09 PM mvc.view.View lambda$createView$0
+INFO: Start EventQueue
+июл. 14, 2020 6:59:09 PM mvc.model.Model$ScheduleTask run
+INFO: In Start Menu
+июл. 14, 2020 6:59:09 PM mvc.view.View setSwingSettings
+INFO: START SET SWINGS
+июл. 14, 2020 6:59:09 PM mvc.model.Model$ScheduleTask run
+INFO: Out Start Menu
+июл. 14, 2020 6:59:10 PM mvc.view.View setSwingSettings
+INFO: MENU HAS JUST CREATED
+июл. 14, 2020 6:59:12 PM mvc.view.View setSwingSettings
+INFO: ALL GUI COMPONENTS ALLOC
+июл. 14, 2020 6:59:12 PM mvc.view.View setSwingSettings
+INFO: BOARD INIT
+июл. 14, 2020 6:59:12 PM mvc.view.View setSwingSettings
+INFO: END SET SWINGS
+июл. 14, 2020 6:59:12 PM mvc.view.View lambda$createView$0
+INFO: End EventQueue
+июл. 14, 2020 6:59:16 PM mvc.view.View$ViewMouseAdapter mouseClicked
+INFO: IN MOUSE CLICKED
+июл. 14, 2020 6:59:16 PM mvc.controller.Controller chooseDirection
+INFO: Direction coords:x=393 y=297
+июл. 14, 2020 6:59:16 PM mvc.view.View$ViewMouseAdapter mouseClicked
+INFO: IN MOUSE CLICKED
+июл. 14, 2020 6:59:21 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:21 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:21 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:21 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:21 PM mvc.view.View$ViewKeyAdapter keyReleased
+INFO: IN KEY RELEASED
+июл. 14, 2020 6:59:22 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:22 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:23 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:23 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:23 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:23 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:23 PM mvc.view.View$ViewKeyAdapter keyReleased
+INFO: IN KEY RELEASED
+июл. 14, 2020 6:59:23 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:24 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:24 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:24 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:24 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:24 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:24 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:24 PM mvc.view.View$ViewKeyAdapter keyReleased
+INFO: IN KEY RELEASED
+июл. 14, 2020 6:59:25 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:25 PM mvc.view.View$ViewKeyAdapter keyReleased
+INFO: IN KEY RELEASED
+июл. 14, 2020 6:59:26 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:26 PM mvc.view.View$ViewKeyAdapter keyReleased
+INFO: IN KEY RELEASED
+июл. 14, 2020 6:59:26 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:27 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:27 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:27 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:27 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:27 PM mvc.view.View$ViewKeyAdapter keyReleased
+INFO: IN KEY RELEASED
+июл. 14, 2020 6:59:28 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:28 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:28 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:28 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:28 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:28 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:28 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:29 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:29 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:29 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:29 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:29 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:29 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:29 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:29 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:29 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:29 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:29 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:29 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:30 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:30 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:30 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:30 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:30 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:30 PM mvc.view.View$ViewKeyAdapter keyReleased
+INFO: IN KEY RELEASED
+июл. 14, 2020 6:59:30 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:31 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:31 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:31 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:31 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:31 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:31 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:31 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:31 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:31 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:31 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:31 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:32 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:32 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:32 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:32 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:32 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:32 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:32 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:32 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:32 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:32 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:32 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:32 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:33 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:33 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:33 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:33 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:33 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:33 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:33 PM mvc.view.View$ViewKeyAdapter keyReleased
+INFO: IN KEY RELEASED
+июл. 14, 2020 6:59:33 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:34 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:34 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:34 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:34 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:34 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:34 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:34 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:34 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:34 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:34 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:35 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:35 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:35 PM mvc.view.View$ViewKeyAdapter keyReleased
+INFO: IN KEY RELEASED
+июл. 14, 2020 6:59:35 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:36 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:36 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:36 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:36 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:36 PM mvc.view.View$ViewKeyAdapter keyReleased
+INFO: IN KEY RELEASED
+июл. 14, 2020 6:59:37 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:38 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:38 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:38 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:38 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:38 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:38 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:38 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:38 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:38 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:38 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:39 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:39 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:39 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:39 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:39 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:39 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:39 PM mvc.view.View$ViewKeyAdapter keyReleased
+INFO: IN KEY RELEASED
+июл. 14, 2020 6:59:40 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:41 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:41 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:41 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:41 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:41 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:41 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:41 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:41 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:41 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:41 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:41 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:41 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyPressed
+INFO: IN KEY PRESSED
+июл. 14, 2020 6:59:42 PM mvc.view.View$ViewKeyAdapter keyReleased
+INFO: IN KEY RELEASED

@@ -1,0 +1,59 @@
+июл 06, 2020 5:55:26 PM TcpServer run
+INFO: Connection has received from /127.0.0.1:60684
+июл 06, 2020 5:55:26 PM TcpServer run
+INFO: Start RequestProcessor
+июл 06, 2020 5:55:26 PM RequestProcessor run
+INFO: Thread-2 is waiting message...
+июл 06, 2020 5:55:46 PM RequestProcessor run
+INFO: Thread-2 received: type=LOGIN text=Dan
+июл 06, 2020 5:55:46 PM RequestProcessor run
+INFO: Thread-2 is waiting message...
+июл 06, 2020 5:55:51 PM TcpServer run
+INFO: Connection has received from /127.0.0.1:60690
+июл 06, 2020 5:55:51 PM TcpServer run
+INFO: Start RequestProcessor
+июл 06, 2020 5:55:51 PM RequestProcessor run
+INFO: Thread-3 is waiting message...
+июл 06, 2020 5:56:00 PM RequestProcessor run
+INFO: Thread-3 received: type=LOGIN text=Lena
+июл 06, 2020 5:56:00 PM RequestProcessor run
+INFO: Thread-3 is waiting message...
+июл 06, 2020 5:56:10 PM RequestProcessor run
+INFO: Thread-2 received: type=TEXT_REQUEST text=hi
+июл 06, 2020 5:56:10 PM RequestProcessor clientsResponse
+INFO: Thread-2 has just sent the message to Dan
+июл 06, 2020 5:56:10 PM RequestProcessor run
+INFO: Thread-2 is waiting message...
+июл 06, 2020 5:56:18 PM RequestProcessor run
+INFO: Thread-3 received: type=TEXT_REQUEST text=привет
+июл 06, 2020 5:56:18 PM RequestProcessor clientsResponse
+INFO: Thread-3 has just sent the message to Lena
+июл 06, 2020 5:56:18 PM RequestProcessor run
+INFO: Thread-3 is waiting message...
+июл 06, 2020 5:56:31 PM RequestProcessor run
+INFO: Thread-2 received: type=GET_USERS text=/users
+июл 06, 2020 5:56:31 PM RequestProcessor clientsResponse
+INFO: Server has just sent all users to Dan
+июл 06, 2020 5:56:31 PM RequestProcessor run
+INFO: Thread-2 is waiting message...
+июл 06, 2020 5:56:44 PM RequestProcessor run
+INFO: Thread-2 received: type=EXIT text=/exit
+июл 06, 2020 5:56:44 PM TcpServer removeClient
+INFO: Dan has just removed
+июл 06, 2020 5:56:44 PM RequestProcessor clientsResponse
+INFO: Dan has just left the chat room
+июл 06, 2020 5:56:44 PM RequestProcessor run
+INFO: Thread[Thread-2,5,main] has just ended work
+июл 06, 2020 5:56:57 PM RequestProcessor run
+WARNING: Sockets(Maybe client has just closed the app):
+java.io.EOFException
+	at java.io.ObjectInputStream$BlockDataInputStream.peekByte(ObjectInputStream.java:2917)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1502)
+	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:422)
+	at RequestProcessor.run(RequestProcessor.java:48)
+	at java.lang.Thread.run(Thread.java:748)
+
+июл 06, 2020 5:56:57 PM TcpServer removeClient
+INFO: Lena has just removed
+июл 06, 2020 5:56:57 PM RequestProcessor run
+INFO: Thread[Thread-3,5,main] has just ended work

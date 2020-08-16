@@ -91,6 +91,7 @@ public class TcpClient implements Runnable, Observable {
 
         } catch (IOException e) {
             logger.log(Level.WARNING, "Socket error", e);
+
             updateObservers(OutputType.ERROR, "Sorry, but something has just happened on the server.\n" +
                     "Try again later");
             connect = false;

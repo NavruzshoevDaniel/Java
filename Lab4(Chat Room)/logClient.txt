@@ -1,0 +1,15 @@
+июл 06, 2020 5:55:26 PM mvc.view.View lambda$createView$0
+INFO: Start EventQueue
+июл 06, 2020 5:55:28 PM mvc.view.View lambda$createView$0
+INFO: End EventQueue
+июл 06, 2020 5:56:44 PM mvc.model.TcpClient run
+WARNING: Socket error
+java.io.EOFException
+	at java.io.ObjectInputStream$BlockDataInputStream.peekByte(ObjectInputStream.java:2917)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1502)
+	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:422)
+	at mvc.model.TcpClient.run(TcpClient.java:77)
+	at java.lang.Thread.run(Thread.java:748)
+
+июл 06, 2020 5:56:44 PM ClientMain main
+INFO: End the app

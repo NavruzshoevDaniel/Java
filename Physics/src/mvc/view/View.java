@@ -75,6 +75,7 @@ public class View implements Observer {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         controller.update(slider.getNameParam(), Double.parseDouble(slider.getCurValue().getText()));
+
                     } catch (Exception ex) {
 
                     }

@@ -1,0 +1,426 @@
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.Main main
+INFO: The factory info has just created successfully
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.StorageObservable registerObserver
+INFO: New controller subscribed: ru.nsu.ccfit.navruzshoev.factory.controller.Controller@60e53b93
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#1 started adding the EngineDetail
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#2 started adding the BodyDetail
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Thread-1 ask car
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#0 started adding the AccessoryDetail
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in EngineDetail Storage(Thread-3)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-6 has just started creating the car
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Auto Storage can't take anything! Waiting for delivery of details(Thread-1)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-5 has just started creating the car
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-4 has just started creating the car
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-3 has just started creating the car
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in AccessoryDetail Storage(Thread-2)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-2 has just started creating the car
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-1 has just started creating the car
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in BodyDetail Storage(Thread-4)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of AccessoryDetail Storage:1(Thread-2)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of EngineDetail Storage:1(Thread-3)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of BodyDetail Storage:1(Thread-4)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from BodyDetail Storage(pool-1-thread-1)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of BodyDetail Storage:0(pool-1-thread-1)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from AccessoryDetail Storage(pool-1-thread-1)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-2)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of AccessoryDetail Storage:0(pool-1-thread-1)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-3)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from EngineDetail Storage(pool-1-thread-1)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-4)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of EngineDetail Storage:0(pool-1-thread-1)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-5)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in Auto Storage(pool-1-thread-1)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-6)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of Auto Storage:1(pool-1-thread-1)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from Auto Storage(Thread-1)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-1 has just finished creating the car
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of Auto Storage:0(Thread-1)
+мая 13, 2020 2:03:18 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Wed May 13 14:03:18 NOVT 2020 : Thread-1 get: Auto #1 (Body:1, Motor:1, Accessory:1)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#2 started adding the BodyDetail
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#1 started adding the EngineDetail
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#0 started adding the AccessoryDetail
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in EngineDetail Storage(Thread-3)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in BodyDetail Storage(Thread-4)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of EngineDetail Storage:1(Thread-3)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in AccessoryDetail Storage(Thread-2)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of BodyDetail Storage:1(Thread-4)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of AccessoryDetail Storage:1(Thread-2)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from BodyDetail Storage(pool-1-thread-2)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of BodyDetail Storage:0(pool-1-thread-2)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from AccessoryDetail Storage(pool-1-thread-2)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of AccessoryDetail Storage:0(pool-1-thread-2)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from EngineDetail Storage(pool-1-thread-2)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-3)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of EngineDetail Storage:0(pool-1-thread-2)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in Auto Storage(pool-1-thread-2)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of Auto Storage:1(pool-1-thread-2)
+мая 13, 2020 2:03:25 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-2 has just finished creating the car
+мая 13, 2020 2:03:26 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Thread-1 ask car
+мая 13, 2020 2:03:26 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from Auto Storage(Thread-1)
+мая 13, 2020 2:03:26 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of Auto Storage:0(Thread-1)
+мая 13, 2020 2:03:26 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Wed May 13 14:03:26 NOVT 2020 : Thread-1 get: Auto #2 (Body:2, Motor:2, Accessory:2)
+мая 13, 2020 2:03:26 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-7 has just started creating the car
+мая 13, 2020 2:03:26 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-7)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#1 started adding the EngineDetail
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#2 started adding the BodyDetail
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#0 started adding the AccessoryDetail
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in BodyDetail Storage(Thread-4)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in EngineDetail Storage(Thread-3)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of BodyDetail Storage:1(Thread-4)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in AccessoryDetail Storage(Thread-2)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from BodyDetail Storage(pool-1-thread-4)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of EngineDetail Storage:1(Thread-3)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of BodyDetail Storage:0(pool-1-thread-4)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of AccessoryDetail Storage:1(Thread-2)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-5)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from AccessoryDetail Storage(pool-1-thread-4)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of AccessoryDetail Storage:0(pool-1-thread-4)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from EngineDetail Storage(pool-1-thread-4)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of EngineDetail Storage:0(pool-1-thread-4)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in Auto Storage(pool-1-thread-4)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of Auto Storage:1(pool-1-thread-4)
+мая 13, 2020 2:03:32 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-4 has just finished creating the car
+мая 13, 2020 2:03:34 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Thread-1 ask car
+мая 13, 2020 2:03:34 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from Auto Storage(Thread-1)
+мая 13, 2020 2:03:34 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-8 has just started creating the car
+мая 13, 2020 2:03:34 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of Auto Storage:0(Thread-1)
+мая 13, 2020 2:03:34 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-8)
+мая 13, 2020 2:03:34 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Wed May 13 14:03:34 NOVT 2020 : Thread-1 get: Auto #3 (Body:3, Motor:3, Accessory:3)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#2 started adding the BodyDetail
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#1 started adding the EngineDetail
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in BodyDetail Storage(Thread-4)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in EngineDetail Storage(Thread-3)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of BodyDetail Storage:1(Thread-4)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of EngineDetail Storage:1(Thread-3)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from BodyDetail Storage(pool-1-thread-6)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of BodyDetail Storage:0(pool-1-thread-6)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: AccessoryDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-6)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-3)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#0 started adding the AccessoryDetail
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in AccessoryDetail Storage(Thread-2)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of AccessoryDetail Storage:1(Thread-2)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from AccessoryDetail Storage(pool-1-thread-6)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of AccessoryDetail Storage:0(pool-1-thread-6)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from EngineDetail Storage(pool-1-thread-6)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of EngineDetail Storage:0(pool-1-thread-6)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in Auto Storage(pool-1-thread-6)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of Auto Storage:1(pool-1-thread-6)
+мая 13, 2020 2:03:39 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-6 has just finished creating the car
+мая 13, 2020 2:03:42 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Thread-1 ask car
+мая 13, 2020 2:03:42 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from Auto Storage(Thread-1)
+мая 13, 2020 2:03:42 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-9 has just started creating the car
+мая 13, 2020 2:03:42 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of Auto Storage:0(Thread-1)
+мая 13, 2020 2:03:42 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Wed May 13 14:03:42 NOVT 2020 : Thread-1 get: Auto #4 (Body:4, Motor:4, Accessory:4)
+мая 13, 2020 2:03:42 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-9)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#2 started adding the BodyDetail
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#1 started adding the EngineDetail
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in BodyDetail Storage(Thread-4)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in EngineDetail Storage(Thread-3)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of BodyDetail Storage:1(Thread-4)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of EngineDetail Storage:1(Thread-3)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from BodyDetail Storage(pool-1-thread-7)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#0 started adding the AccessoryDetail
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of BodyDetail Storage:0(pool-1-thread-7)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in AccessoryDetail Storage(Thread-2)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-5)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of AccessoryDetail Storage:1(Thread-2)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from AccessoryDetail Storage(pool-1-thread-7)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of AccessoryDetail Storage:0(pool-1-thread-7)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from EngineDetail Storage(pool-1-thread-7)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of EngineDetail Storage:0(pool-1-thread-7)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in Auto Storage(pool-1-thread-7)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of Auto Storage:1(pool-1-thread-7)
+мая 13, 2020 2:03:46 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-7 has just finished creating the car
+мая 13, 2020 2:03:50 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Thread-1 ask car
+мая 13, 2020 2:03:50 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from Auto Storage(Thread-1)
+мая 13, 2020 2:03:50 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-10 has just started creating the car
+мая 13, 2020 2:03:50 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of Auto Storage:0(Thread-1)
+мая 13, 2020 2:03:50 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-10)
+мая 13, 2020 2:03:50 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Wed May 13 14:03:50 NOVT 2020 : Thread-1 get: Auto #5 (Body:5, Motor:5, Accessory:5)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#2 started adding the BodyDetail
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in BodyDetail Storage(Thread-4)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of BodyDetail Storage:1(Thread-4)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from BodyDetail Storage(pool-1-thread-8)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of BodyDetail Storage:0(pool-1-thread-8)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: AccessoryDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-8)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-3)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#0 started adding the AccessoryDetail
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#1 started adding the EngineDetail
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in AccessoryDetail Storage(Thread-2)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in EngineDetail Storage(Thread-3)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of EngineDetail Storage:1(Thread-3)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of AccessoryDetail Storage:1(Thread-2)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from AccessoryDetail Storage(pool-1-thread-8)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of AccessoryDetail Storage:0(pool-1-thread-8)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from EngineDetail Storage(pool-1-thread-8)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of EngineDetail Storage:0(pool-1-thread-8)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in Auto Storage(pool-1-thread-8)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of Auto Storage:1(pool-1-thread-8)
+мая 13, 2020 2:03:53 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-8 has just finished creating the car
+мая 13, 2020 2:03:58 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Thread-1 ask car
+мая 13, 2020 2:03:58 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-1 has just started creating the car
+мая 13, 2020 2:03:58 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-1)
+мая 13, 2020 2:03:58 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-6 has just started creating the car
+мая 13, 2020 2:03:58 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-6)
+мая 13, 2020 2:03:58 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-4 has just started creating the car
+мая 13, 2020 2:03:58 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-4)
+мая 13, 2020 2:03:58 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-2 has just started creating the car
+мая 13, 2020 2:03:58 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-2)
+мая 13, 2020 2:03:58 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from Auto Storage(Thread-1)
+мая 13, 2020 2:03:58 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of Auto Storage:0(Thread-1)
+мая 13, 2020 2:03:58 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Wed May 13 14:03:58 NOVT 2020 : Thread-1 get: Auto #6 (Body:6, Motor:6, Accessory:6)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#2 started adding the BodyDetail
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in BodyDetail Storage(Thread-4)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of BodyDetail Storage:1(Thread-4)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from BodyDetail Storage(pool-1-thread-9)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#1 started adding the EngineDetail
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of BodyDetail Storage:0(pool-1-thread-9)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#0 started adding the AccessoryDetail
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-5)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: AccessoryDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-9)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in EngineDetail Storage(Thread-3)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of EngineDetail Storage:1(Thread-3)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in AccessoryDetail Storage(Thread-2)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of AccessoryDetail Storage:1(Thread-2)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from AccessoryDetail Storage(pool-1-thread-9)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of AccessoryDetail Storage:0(pool-1-thread-9)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from EngineDetail Storage(pool-1-thread-9)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of EngineDetail Storage:0(pool-1-thread-9)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in Auto Storage(pool-1-thread-9)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of Auto Storage:1(pool-1-thread-9)
+мая 13, 2020 2:04:00 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-9 has just finished creating the car
+мая 13, 2020 2:04:06 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Thread-1 ask car
+мая 13, 2020 2:04:06 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from Auto Storage(Thread-1)
+мая 13, 2020 2:04:06 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of Auto Storage:0(Thread-1)
+мая 13, 2020 2:04:06 PM ru.nsu.ccfit.navruzshoev.threadpool.Dealer run
+INFO: Wed May 13 14:04:06 NOVT 2020 : Thread-1 get: Auto #7 (Body:7, Motor:7, Accessory:7)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#2 started adding the BodyDetail
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in BodyDetail Storage(Thread-4)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of BodyDetail Storage:1(Thread-4)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from BodyDetail Storage(pool-1-thread-10)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of BodyDetail Storage:0(pool-1-thread-10)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: AccessoryDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-10)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: BodyDetail Storage can't take anything! Waiting for delivery of details(pool-1-thread-3)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#1 started adding the EngineDetail
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.threadpool.Producer run
+INFO: Producer#0 started adding the AccessoryDetail
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in EngineDetail Storage(Thread-3)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in AccessoryDetail Storage(Thread-2)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of EngineDetail Storage:1(Thread-3)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of AccessoryDetail Storage:1(Thread-2)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from AccessoryDetail Storage(pool-1-thread-10)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of AccessoryDetail Storage:0(pool-1-thread-10)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Got the  detail from EngineDetail Storage(pool-1-thread-10)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage get
+INFO: Size of EngineDetail Storage:0(pool-1-thread-10)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Added the detail in Auto Storage(pool-1-thread-10)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.factory.storages.Storage add
+INFO: Size of Auto Storage:1(pool-1-thread-10)
+мая 13, 2020 2:04:07 PM ru.nsu.ccfit.navruzshoev.threadpool.Worker run
+INFO: pool-1-thread-10 has just finished creating the car

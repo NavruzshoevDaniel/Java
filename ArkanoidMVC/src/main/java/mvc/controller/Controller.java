@@ -60,11 +60,12 @@ public class Controller implements IController {
     public void keyReleased(KeyEvent keyEvent) {
         int key = keyEvent.getKeyCode();
 
-        if (key == KeyEvent.VK_LEFT) {
+        if (key == KeyEvent.VK_LEFT && model.getPlank().getDx() < 0) {
             model.getPlank().setDx(0);
             model.getPlank().setInMove(false);
         }
-        if (key == KeyEvent.VK_RIGHT) {
+
+        if (key == KeyEvent.VK_RIGHT && model.getPlank().getDx() > 0) {
             model.getPlank().setDx(0);
             model.getPlank().setInMove(false);
         }

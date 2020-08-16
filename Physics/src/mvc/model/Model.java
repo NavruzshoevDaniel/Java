@@ -70,6 +70,8 @@ public class Model implements Observable {
         double a = defineTable.get("A");
         double b = defineTable.get("B");
 
+        dataset.addSeries(createPotentialWell(a));
+
         for (int i = 0; i < roots.size(); i++) {
 
             XYSeries xySeries = new XYSeries(String.valueOf(i), true, true);
@@ -97,8 +99,24 @@ public class Model implements Observable {
             dataset.addSeries(xySeries);
         }
 
+
         return dataset;
 
+    }
+
+    private XYSeries createPotentialWell(double a){
+        XYSeries xySeries = new XYSeries(String.valueOf("Potential well"), true, true);
+
+        for (double x = -1 * a - 10; x < a + 10; x += 0.01) {
+            if (x <= -a / 2) {
+                xySeries.add(x, 0);
+            } else if (x >= a / 2) {
+                xySeries.add(x, 0);
+            } else {
+                xySeries.add(x, -1);
+            }
+        }
+        return xySeries;
     }
 
     private void searchRoots() {

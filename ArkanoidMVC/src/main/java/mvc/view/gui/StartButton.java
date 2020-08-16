@@ -49,9 +49,9 @@ public class StartButton extends JButton {
             logger.log(Level.WARNING,"StartButton file doesn't exists",e);
         }
 
-        setContentAreaFilled(false);
+       // setContentAreaFilled(false);
         setBorderPainted(false);
-        setFocusPainted(false);
+        //setFocusPainted(false);
         setOpaque(false);
     }
 }
